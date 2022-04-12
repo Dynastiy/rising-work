@@ -1,0 +1,167 @@
+@import url('@/assets/css/partials.css');
+body {
+    background-color: var(--accent-color);
+}
+
+body.active {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+.hero--section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: var(--primary-color); */
+    background: url('https://wallpapercave.com/wp/NOTfDtd.jpg');
+    height: 50vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-blend-mode: overlay;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero--section .input--field {
+    border: 2px solid var(--main-color);
+    display: flex;
+    width: 70%;
+    gap: 2px;
+    margin: 0 auto;
+    margin-top: 1.3rem;
+    border-radius: 5px;
+}
+
+.hero--section .input--field input[type="search"] {
+    border: none;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+    outline: none;
+}
+
+.hero--section .input--field input[type="button"] {
+    border: none;
+    background-color: var(--main-color);
+    color: var(--gray-100);
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    margin: 0.1rem;
+    border-radius: 5px;
+}
+
+.app--header {
+    background-color: var(--main-color);
+    padding: 1.5rem 0;
+    box-shadow: 0xp 0px 2px 1px rgba(0, 0, 0, 0.7);
+}
+
+.app--header a {
+    color: var(--gray-100);
+}
+
+.app--header .menu {
+    display: flex;
+    gap: var(--spacer);
+}
+
+.app--header .menu .other--menu {
+    display: flex;
+    gap: var(--spacer);
+}
+
+.app--header .menu .router-link-exact-active {
+    color: var(--secondary-color);
+}
+
+.trusted--by {
+    background-color: var(--main-color);
+}
+
+.btn--main {
+    color: var(--main-color);
+    background-color: var(--accent-color);
+    padding: 0.4rem 2rem;
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+}
+
+.btn--main:hover {
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+}
+
+
+/* Main App Drawer  */
+
+.main--app--drawer {
+    background-color: var(--main-color);
+    width: 252px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.top--image {
+    padding: 2rem 0;
+}
+
+.main--app--drawer .menu--header {
+    color: var(--gray-500);
+    text-transform: uppercase;
+    font-size: 14px;
+    display: block;
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+}
+
+.main--app--drawer a {
+    color: var(--gray-100);
+    display: block;
+    padding: 0.8rem 2rem;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.main--app--drawer .router-link-exact-active {
+    background-color: var(--secondary-color);
+    color: var(--aza-blue);
+    font-weight: bold;
+}
+
+.main--app--drawer a:hover {
+    background-color: var(--secondary-color);
+    color: var(--aza-blue);
+}
+
+
+/* Dashboard App Drawer  */
+
+#main--dashboard {
+    margin-left: 252px;
+    padding: 2rem;
+}
+
+
+/* BreadCrumb  */
+
+.breadcrumb--text {
+    color: var(--gray-500);
+    font-size: 0.8rem;
+}
+
+.button--green {
+    background-color: var(--green-100);
+    border: 1px solid var(--green-100);
+    color: var(--aza--white);
+    border-radius: 5px;
+    padding: 8px 30px;
+    font-size: 14px;
+}

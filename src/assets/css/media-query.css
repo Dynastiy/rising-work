@@ -1,0 +1,47 @@
+    @media (max-width: 990px) {
+        #main {
+            margin-left: 0px;
+            padding: 3rem 1rem;
+        }
+        #sidebar {
+            display: none;
+        }
+        .w-50 {
+            width: 100% !important;
+        }
+        .business-options {
+            grid-template-columns: auto;
+        }
+        /* Main Dashboard  */
+        #main--dashboard {
+            margin-left: 0;
+            padding: 3rem 1rem;
+        }
+        .main--app--drawer {
+            left: -1000px;
+        }
+        .main--app--drawer.active {
+            left: 0;
+            width: 70%;
+        }
+        .mobile-nav {
+            display: block;
+        }
+        .button--green {
+            padding: 6px 20px;
+            font-size: 0.8rem;
+        }
+        .main--content {
+            display: unset;
+            grid-template-columns: auto;
+        }
+        .main--content .left--top {
+            margin-top: var(--spacer);
+        }
+        .mobile--header {
+            padding: 0.8rem 1rem;
+        }
+        .web--nav {
+            display: none;
+        }
+    }
