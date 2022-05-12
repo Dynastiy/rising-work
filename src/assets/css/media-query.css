@@ -119,11 +119,17 @@
             display: block;
           }
           .gallery__thumb img {
-              height: 60px;
-              width: 200px;
-          }
+            height: 80px;
+            width: 70px;
+            border-radius: 5px;
+        }
           .plans {
               position: unset;
               width: 100%;
+          }
+          .image--views img {
+            max-width: 95%;
+            vertical-align: top;
+            /* border-radius: 5px; */
           }
     }

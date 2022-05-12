@@ -408,7 +408,7 @@ body.active {
 .image--views img {
     max-width: 100%;
     vertical-align: top;
-    border-radius: 5px;
+    /* border-radius: 5px; */
   }
   
   .gallery {

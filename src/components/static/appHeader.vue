@@ -41,7 +41,7 @@
       <div class="mobile--menu px-4">
         <div class="d-flex align-items-center justify-content-between">
           <div class="text-white">
-            LOGO
+            <router-link to="/">LOGO</router-link>
           </div>
           <div >
             <span class="material-icons text-white" id="tog" style="font-size:30px"  role="button">
