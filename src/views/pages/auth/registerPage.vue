@@ -15,30 +15,110 @@
               <!-- <img src="@/assets/logo.svg" width="40" alt="" /> -->
             </div>
             <span class="login100-form-title text-center p-b-30"> Register </span>
-            <div class="m-b-20">
-              <span class="txt1 p-b-11"> Name </span>
-              <div
-                class="wrap-input100 validate-input"
-                data-validate="Username is required"
-              >
-                <input
-                  class="input100"
-                  type="text"
-                  name="username"
-                  v-model="username"
-                />
-                <span class="focus-input100"></span>
-              </div>
-              <div v-show="error_msgs.email">
-                <span
-                  class="small text-danger"
-                  v-for="error in error_msgs.email"
-                  :key="error.id"
+            <div class="d-flex justify-content-between">
+              <div class="m-b-20">
+                <span class="txt1 p-b-11"> First Name </span>
+                <div
+                  class="wrap-input100 validate-input"
+                  data-validate="Username is required"
                 >
-                  *{{ error }}
-                </span>
+                  <input
+                    class="input100"
+                    type="text"
+                    name="username"
+                    v-model="payload.first_name"
+                  />
+                  
+                  <span class="focus-input100"></span>
+                </div>
+                <div v-show="error_msgs.first_name">
+                  <span
+                    class="small text-danger"
+                    v-for="error in error_msgs.first_name"
+                    :key="error.id"
+                  >
+                    *{{ error }}
+                  </span>
+                </div>
+              </div>
+              <div class="m-b-20">
+                <span class="txt1 p-b-11"> Last Name </span>
+                <div
+                  class="wrap-input100 validate-input"
+                  data-validate="Username is required"
+                >
+                  <input
+                    class="input100"
+                    type="text"
+                    name="username"
+                    v-model="payload.last_name"
+                  />
+                  
+                  <span class="focus-input100"></span>
+                </div>
+                <div v-show="error_msgs.last_name">
+                  <span
+                    class="small text-danger"
+                    v-for="error in error_msgs.last_name"
+                    :key="error.id"
+                  >
+                    *{{ error }}
+                  </span>
+                </div>
               </div>
             </div>
+
+            <div class="m-b-20">
+                <span class="txt1 p-b-11"> Email </span>
+                <div
+                  class="wrap-input100 validate-input"
+                  data-validate="Username is required"
+                >
+                  <input
+                    class="input100"
+                    type="text"
+                    name="email"
+                    v-model="payload.email"
+                  />
+                  
+                  <span class="focus-input100"></span>
+                </div>
+                <div v-show="error_msgs.email">
+                  <span
+                    class="small text-danger"
+                    v-for="error in error_msgs.email"
+                    :key="error.id"
+                  >
+                    *{{ error }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="m-b-20">
+                <span class="txt1 p-b-11"> Phone Number </span>
+                <div
+                  class="wrap-input100 validate-input"
+                  data-validate="Phone Number is required"
+                >
+                  <input
+                    class="input100"
+                    type="number"
+                    name="username"
+                    v-model="payload.phone_no"
+                  />
+                  
+                  <span class="focus-input100"></span>
+                </div>
+                <div v-show="error_msgs.phone_no">
+                  <span
+                    class="small text-danger"
+                    v-for="error in error_msgs.phone_no"
+                    :key="error.id"
+                  >
+                    *{{ error }}
+                  </span>
+                </div>
+              </div>
 
              <div class="m-b-20">
               <span class="txt1 p-b-11"> Country </span>
@@ -46,18 +126,20 @@
                 class="wrap-input100 validate-input"
                 data-validate="Username is required"
               >
-                <input
+                <select
                   class="input100"
                   type="text"
                   name="username"
-                  v-model="username"
-                />
+                  v-model="payload.country"
+                >
+                <option v-for="item in countries" :key="item.id" :value="item.name">  {{ item.name }}  </option>
+                </select>
                 <span class="focus-input100"></span>
               </div>
-              <div v-show="error_msgs.email">
+              <div v-show="error_msgs.phone_no">
                 <span
                   class="small text-danger"
-                  v-for="error in error_msgs.email"
+                  v-for="error in error_msgs.phone_no"
                   :key="error.id"
                 >
                   *{{ error }}
@@ -66,18 +148,20 @@
             </div>
 
             <div class="m-b-20">
-              <span class="txt1 p-b-11"> Password </span>
-              <div
-                class="wrap-input100 validate-input"
-                data-validate="Password is required"
-              >
-                <input
-                  class="input100"
-                  type="password"
-                  name="pass"
-                  v-model="password"
-                />
-                <span class="focus-input100"></span>
+                <span class="txt1 p-b-11"> Password </span>
+                <div
+                  class="wrap-input100 validate-input"
+                  data-validate="Phone Number is required"
+                >
+                  <input
+                    class="input100"
+                    type="text"
+                    name="password"
+                    v-model="payload.password"
+                  />
+                  
+                  <span class="focus-input100"></span>
+                </div>
                 <div v-show="error_msgs.password">
                   <span
                     class="small text-danger"
@@ -88,7 +172,6 @@
                   </span>
                 </div>
               </div>
-            </div>
             <!-- <div class="text-right pb-1">
             <span class=""> <router-link to="/forgot-password" class="text-info font-weight-bold">Forgot Password?</router-link> </span>
           </div>  -->
@@ -109,25 +192,66 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      username: "",
-      password: "",
+      payload:{
+        first_name: "",
+        last_name: "",
+        country: "",
+        email: "",
+        password: "",
+        phone_no: "",
+      },
       msg: "",
       loading: false,
       error_msgs: "",
+      countries: ''
     };
   },
   methods: {
     async login() {
       this.loading = true
-        this.$router.push('/buyer')
+      console.log(this.payload);
+      try {
+        let res = await axios.post("https://api.risingwork.com/api/auth/signup", this.payload);
+        console.log(res);
+        this.$toastify({
+          text: `${res.data.message}`,
+          className: "info",
+          style: {
+            background: "green",
+          },
+        }).showToast();
+        this.$router.push('/sign-in')
+      } catch (error) {
+        // console.log(error);
+        // console.log(error.response.data.errors);
+         this.$toastify({
+          text: `${error.response.data.message}`,
+          className: "info",
+          style: {
+            background: "#f00",
+          },
+        }).showToast();
+        this.error_msgs = error.response.data.errors;
+      }
+        
+        this.payload = {}
       this.loading = false;
     },
+    async getCountries(){
+      let res = await axios.get('https://restcountries.com/v2/all')
+      // console.log(res);
+      this.countries = res.data
+    }
+  },
+  mounted(){
+    this.getCountries()
   },
   async created() {
-    
+  
   },
 };
 </script>

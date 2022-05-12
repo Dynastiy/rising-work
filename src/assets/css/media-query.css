@@ -1,4 +1,7 @@
     @media (max-width: 990px) {
+        .container {
+            padding: 1rem 1.5rem;
+        }
         #main {
             margin-left: 0px;
             padding: 3rem 1rem;
@@ -24,9 +27,6 @@
             left: 0;
             width: 70%;
         }
-        .mobile-nav {
-            display: block;
-        }
         .button--green {
             padding: 6px 20px;
             font-size: 0.8rem;
@@ -44,4 +44,86 @@
         .web--nav {
             display: none;
         }
+        #main--dashboard {
+            margin-left: 0;
+            padding: 0.8rem 1rem;
+        }
+        #dashboard--header {
+            margin-left: 0;
+            padding: 0.8rem 1rem;
+        }
+        #side-bar {
+            width: 70%;
+        }
+        .menu--open {
+            display: block;
+        }
+        .menu--close {
+            display: block;
+        }
+        .analytics {
+            grid-template-columns: auto;
+            grid-gap: 20px;
+        }
+        .featured--products .content {
+            grid-template-columns: auto;
+        }
+        .create-post-content {
+            width: 80%;
+        }
+        .mobile--nav {
+            display: block;
+            width: 80%;
+            min-height: 100vh;
+            position: fixed;
+            z-index: 999;
+            background-color: #000;
+            top: 0;
+            right: -1000px;
+        }
+        .mobile--nav a {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 2rem;
+            padding: 1rem 3rem;
+        }
+        .mobile--nav .router-link-exact-active {
+            background-color: var(--secondary-color);
+        }
+        .mobile--nav.active {
+            right: 0;
+        }
+        .menu {
+            display: none !important;
+        }
+        .mobile--menu {
+            display: block;
+        }
+        .body--content {
+            grid-template-columns: auto;
+        }
+        .gallery__img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            object-position: top;
+            transition: opacity 0.3s ease-in-out;
+          }
+          .gallery__thumb {
+            padding-top: 6px;
+            margin: 6px;
+            display: block;
+          }
+          .gallery__thumb img {
+              height: 60px;
+              width: 200px;
+          }
+          .plans {
+              position: unset;
+              width: 100%;
+          }
     }

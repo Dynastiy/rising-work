@@ -16,19 +16,62 @@ const routes = [{
             // which is lazy-loaded when the route is visited.
             component: () =>
                 import ( /* webpackChunkName: "about" */ '../views/pages/homePage/indexPage.vue')
-        }, ]
-    },
-    {
-        path: '/buyer',
-        component: DashboardView,
-        children: [{
-            path: '/buyer',
+        },
+        {
+            path: '/categories',
+            name: 'Categories',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import ( /* webpackChunkName: "about" */ '../views/pages/buyer/dashboard/indexPage.vue')
+                import ( /* webpackChunkName: "about" */ '../views/pages/homePage/allServices.vue')
+        }, 
+        {
+            path: 'services/:slug',
+            name: 'product-detail',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import ( /* webpackChunkName: "about" */ '../views/pages/homePage/_id.vue')
         }, ]
+    },
+    {
+        path: '/dashboard',
+        component: DashboardView,
+        children: [{
+                path: '/dashboard',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/indexPage.vue')
+            },
+            {
+                path: '/completed',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/completedOrders.vue')
+            },
+            {
+                path: '/pending',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/pendingOrders.vue')
+            },
+            {
+                path: '/delivered',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/deliveredOrders.vue')
+            },
+        ]
     },
     {
         path: '/register',

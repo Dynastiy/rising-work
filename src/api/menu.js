@@ -1,4 +1,5 @@
-const items = [{
+const items = [
+    {
         id: 1,
         menu_header: "Menu",
         sub_menu: [{
@@ -21,10 +22,10 @@ const items = [{
                 id: 2,
                 menu_item: "Delivered",
                 url: '/delivered',
-                icon: 'done'
+                icon: 'assignment_turned_in'
             },
             {
-                id: 2,
+                id: 3,
                 menu_item: "Completed",
                 url: '/completed',
                 icon: 'done'

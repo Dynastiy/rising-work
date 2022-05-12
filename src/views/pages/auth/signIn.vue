@@ -17,7 +17,7 @@
             <span class="login100-form-title text-center p-b-30"> Login </span>
 
             <div class="m-b-20">
-              <span class="txt1 p-b-11"> Username </span>
+              <span class="txt1 p-b-11"> Email </span>
               <div
                 class="wrap-input100 validate-input"
                 data-validate="Username is required"
@@ -26,7 +26,7 @@
                   class="input100"
                   type="text"
                   name="username"
-                  v-model="username"
+                  v-model="credentials.email"
                 />
                 <span class="focus-input100"></span>
               </div>
@@ -51,7 +51,7 @@
                   class="input100"
                   type="password"
                   name="pass"
-                  v-model="password"
+                  v-model="credentials.password"
                 />
                 <span class="focus-input100"></span>
                 <div v-show="error_msgs.password">
@@ -85,11 +85,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      username: "",
+      credentials:{
+       email: "",
       password: "",
+      },
       msg: "",
       loading: false,
       error_msgs: "",
@@ -98,7 +101,30 @@ export default {
   methods: {
     async login() {
       this.loading = true
-     this.$router.push('/buyer')
+       try {
+        let res = await axios.post("https://api.risingwork.com/api/auth/signin", this.credentials);
+        const token = res.data.token
+        const user = res.data.user
+        this.$store.dispatch("login", { token, user });
+        console.log(res);
+        this.$toastify({
+          text: `Welcome ${res.data.user.first_name} ${res.data.user.last_name}`,
+          className: "info",
+          style: {
+            background: "green",
+          },
+        }).showToast();
+     this.$router.push('/dashboard')
+      } catch (error) {
+        console.log(error);
+        // this.errorMsg = error.response.error;
+      }
+      this.loading = false;
+      this.loading = true
+      console.log(this.payload);
+     
+        
+        this.payload = {}
       this.loading = false;
     },
   },
