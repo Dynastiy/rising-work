@@ -369,8 +369,15 @@ body.active {
     padding: 1rem;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
 }
+.creative--services h5 {
+    font-size: 0.9rem;
+}
+.creative--services h3{
+    font-size: 1.2rem;
+}
 .creative--services h5, .creative--services h3{
     color: #fff;
+
 }
 .creative--services:hover {
     transform: scale(1.1);
@@ -570,7 +577,7 @@ body.active {
 .footer a,
 .footer p {
     color: var(--gray-500);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
 .footer a:hover {
@@ -579,7 +586,7 @@ body.active {
 
 .footer h4 {
     color: var(--gray-200);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 /* Plans  */
@@ -617,6 +624,16 @@ body.active {
     position: sticky !important;
     top: 80px;
 }
+.nav--item {
+    background-color:  var(--gray-400);
+    border: none ;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 3px;
+}
+.nav--item.active {
+    background-color: var(--secondary-color);
+}
 .select--more {
     background-color: #fff;
     border-radius: 20px;
@@ -644,4 +661,17 @@ body.active {
     flex-direction: column;
     justify-content: space-evenly;
     /* align-items: center; */
+}
+.checkout--button {
+    background-color: var(--secondary-color);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    border: none;
+}
+.product--image img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    object-position: center;
 }

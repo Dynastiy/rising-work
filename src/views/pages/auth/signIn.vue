@@ -114,7 +114,17 @@ export default {
             background: "green",
           },
         }).showToast();
-     this.$router.push('/dashboard')
+        // checks if it is from a redirect url and redirect to the next url else, redirects to dashboard
+        let return_url = this.$route.query.return_url 
+        if (return_url === undefined) {
+          this.$router.push('/dashboard')
+        }
+        else{
+          this.$router.push(`${return_url}`)
+        }
+        
+        console.log(return_url);
+        
       } catch (error) {
         console.log(error);
         // this.errorMsg = error.response.error;
@@ -122,7 +132,8 @@ export default {
       this.loading = false;
       this.loading = true
       console.log(this.payload);
-     
+
+      
         
         this.payload = {}
       this.loading = false;

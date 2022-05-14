@@ -34,7 +34,17 @@ const routes = [{
             // which is lazy-loaded when the route is visited.
             component: () =>
                 import ( /* webpackChunkName: "about" */ '../views/pages/homePage/_id.vue')
-        }, ]
+        },
+        {
+            path: '/cart/checkout',
+            name: 'checkout',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import ( /* webpackChunkName: "about" */ '../views/pages/homePage/checkOut.vue')
+        },
+     ]
     },
     {
         path: '/dashboard',
@@ -84,7 +94,7 @@ const routes = [{
     },
     {
         path: '/sign-in',
-        name: 'Sign in',
+        name: 'login',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.

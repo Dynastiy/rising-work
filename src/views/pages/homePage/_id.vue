@@ -22,52 +22,36 @@
                                 <h1 class="font-weight-bold text-uppercase">
                                     {{ product.name }}
                                 </h1>
-                                <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
+                                <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
                             </div>
-                            <div class="d-flex align-items-center mt-4" style="gap:30px">
-                                <div>
-                                    <label for="" class="m-0">Select Plan</label>
-                                    <div class="dropdown ">
-                                        <button class="select--more dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                        <!-- <span class="text-dark material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" > -->
-                                            Select Plan
-                                        <!-- </span> -->
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <div class="px-3 d-flex align-items-center" style="gap:10px" v-for="plan in plansObj" :key="plan.id">
-                                                <input type="checkbox" name="" id="">
-                                                <label for="" class="m-0 text-capitalize"> {{ plan.name }} </label>
-                                            </div>
+                            <div class="mt-3">
+                                <div class="select--plan mb-3">
+                                    <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan </label>
+                                   <div class="d-lg-flex" style="gap:20px">
+                                       <div class="plan--selector mb-2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                            <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
                                         </div>
-                                    </div>
+                                   </div>
                                 </div>
                                 <div>
-                                    <label  for="" class="m-0">Select Additional Features</label>
-                                    <div class="dropdown ">
-                                        <button class="select--more dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                        <!-- <span class="text-dark material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" > -->
-                                            Select Additional Features
-                                        <!-- </span> -->
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <div class="px-3 d-flex align-items-center" style="gap:10px" v-for="feature in product.features" :key="feature.id">
-                                                <input type="checkbox" name="" id="">
-                                                <label for="" class="m-0 text-capitalize"> {{ feature.name }} </label>
-                                            </div>
-                                        </div>
+                                    <label  for="" class="m-0 text-dark">Select Additional Features</label>
+                                    <div class="d-flex align-items-center" style="gap:10px" v-for="feature in product.features" :key="feature.id">
+                                        <input type="checkbox" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                                        <label :for="feature.id" class="m-0 text-capitalize"> {{ feature.name }} </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="description mt-4">
-                                <h2 class="text-uppercase"> about {{ product.name }} </h2>
-                                <p> {{ product.description }} </p>
+                                
+                                <h4 class="text-uppercase text-dark font-weight-bold"> about {{ product.name }} </h4>
+                                <p class="small text-capitalize"> {{ product.description }} </p>
                             </div>
 
-                            <div class="d-flex align-items-center" style="gap:30px">
+                            <div class="d-flex align-items-center mt-4" style="gap:30px">
                                 <div>
-                                    <h1>$300</h1>
+                                    <h1>${{ product.price }} </h1>
                                 </div>
-                                <div role="button" class="add-to-cart shadow-lg" > 
+                                <div role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
                                         shopping_cart
                                     </span>
@@ -151,10 +135,47 @@ export default {
             comment: '',
             reviews: '',
             posting: false,
-            rating: ''
+            rating: '',
+            cart: [],
+            cartItem: [],
+            selected_plan: '',
+            isActive: true,
+            plan_id: ''
         }
     },
     methods:{
+        selectPlan(plan){
+            this.isActive = ( this.isActive === plan.id ) ? null : plan.id;
+            console.log(plan);
+            this.plan_id = plan.id
+            this.selected_plan = plan.price;
+            console.log(this.selected_plan);
+            this.addPrice()
+        },
+        addPrice(){
+            console.log(this.cartItem);
+                let totalPrice = this.cartItem.reduce((accumulator, item) => {
+                    return accumulator + item.price;
+                }, 0);
+
+            this.product.price = totalPrice + this.selected_plan;
+            this.total_amount = totalPrice + this.selected_plan;
+            console.log(totalPrice);
+        },
+        addToCart(){
+            // let formData = new FormData()
+            // formData.append("product_id", this.product.id)
+            // formData.append("")
+            if(!this.$store.getters.isLoggedIn){
+                let url = '/cart/checkout'
+                this.$router.push({ name: 'login', query: { return_url: url } })
+            }
+            this.cart.push(
+            this.cartItem,
+            this.plan_id, this.total_amount );
+            console.log(this.cart);
+            this.$router.push('/cart/checkout')
+        },
         async getProductId(){
             try {
                 let res = await this.$http.get(`/show-product/${this.slug}`)
@@ -170,18 +191,7 @@ export default {
                 console.log(error);
             }
         },
-        // async getProduct(){
-        //      try {
-        //         let res = await this.$http.get(`/find-product/${this.item_id}`)
-        //         this.product = res.data.product
-        //         this.dataObj = res.data.product
-        //         this.reviews = res.data.product.reviews;
-        //         console.log(res);
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // },
-        
+       
         async addReview(){
             this.posting = true;
             let dataObj = {
@@ -201,9 +211,7 @@ export default {
         }
     },
     mounted(){
-        this.getProductId()
-        // this.getProduct();
-        
+            this.getProductId()
     },
     computed:{
       loggedIn(){

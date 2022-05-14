@@ -26,40 +26,18 @@
       <!-- Feature Products  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h2 class="mb-4">Popular Creative Services</h2>
+          <h2 class="mb-4">Trending Services</h2>
           <div class="content">
-            <div class="creative--services creative--services1 " data-aos="fade-up-right">
-              <div>
-                <hr class="bg-white w-50" style="height:2px">
-                <h3>Luxury Logo Design</h3>
-              <h5>Start at $300</h5>
-              </div>
+            <div v-for="product in products.data" :key="product.id">
+                <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
+                    <div>
+                        <hr class="bg-white w-50" style="height:2px">
+                        <h3 class="text-capitalize"> {{ product.name }} </h3>
+                        <h5>Start at ${{product.price}}</h5>
+                    </div>
+                </div>
             </div>
-
-            <div class="creative--services creative--services2" data-aos="fade-up-right">
-              <div>
-                <hr class="bg-white w-50" style="height:2px">
-                <h3>Letterhead Design</h3>
-              <h5>Start at $300</h5>
-              </div>
             </div>
-
-            <div class="creative--services creative--services3" data-aos="fade-up-right">
-              <div>
-                <hr class="bg-white w-50" style="height:2px">
-                <h3>Packaging Design</h3>
-              <h5>Start at $300</h5>
-              </div>
-            </div>
-
-            <div class="creative--services creative--services4" data-aos="fade-up-right">
-              <div>
-                <hr class="bg-white w-50" style="height:2px">
-                <h3>Book Cover Design</h3>
-              <h5>Start at $300</h5>
-              </div>
-            </div>
-          </div>
           <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
           arrow_forward
           </span></router-link>
@@ -70,7 +48,7 @@
         <div>
           <h1 class="text-white">Explore Magic?</h1>
           <h3 class="mb-3" style="color: var(--gray-400)">Need a logo or any graphics design?</h3>
-          <p class="w-50 text-white mb-3">Join 10,000+ businesses, agencies and others
+          <p class="w-50 text-white mb-3 small">Join 10,000+ businesses, agencies and others
               that leverage to grow their businesses through
               high quality custom design and branding.
           </p>
@@ -81,35 +59,17 @@
         <!-- Trending Professional Services  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h2 class="mb-4">Trending Professional Services</h2>
+          <h2 class="mb-4">Top rated Professional Services</h2>
           <div class="content">
-            <div class="creative--services creative--services1 " data-aos="fade-up-right">
+            <div v-for="product in top_rated_products" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"
+            :key="product.key" class="creative--services creative--services1" data-aos="fade-up-right"
+            role="button" @click="viewProduct(product.slug)">
               <div>
-                <h3>Luxury Logo Design</h3>
-              <h5>Start at $300</h5>
+               <h3 class="text-capitalize"> {{ product.name }} </h3>
+                <h5>Start at ${{product.price}}</h5>
               </div>
             </div>
 
-            <div class="creative--services creative--services2" data-aos="fade-up-right">
-              <div>
-                <h3>Letterhead Design</h3>
-              <h5>Start at $300</h5>
-              </div>
-            </div>
-
-            <div class="creative--services creative--services3" data-aos="fade-up-right">
-              <div>
-                <h3>Packaging Design</h3>
-              <h5>Start at $300</h5>
-              </div>
-            </div>
-
-            <div class="creative--services creative--services4" data-aos="fade-up-right">
-              <div>
-                <h3>Book Cover Design</h3>
-              <h5>Start at $300</h5>
-              </div>
-            </div>
           </div>
           <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
           arrow_forward
@@ -121,7 +81,7 @@
         <div>
           <h1 class="text-white">Explore Magic?</h1>
           <h3 class="mb-3" style="color: var(--gray-400)">Need a logo or any graphics design?</h3>
-          <p class="w-50 text-white mb-3">Join 10,000+ businesses, agencies and others
+          <p class="w-50 text-white mb-3 small">Join 10,000+ businesses, agencies and others
               that leverage to grow their businesses through
               high quality custom design and branding.
           </p>
@@ -137,6 +97,40 @@ import slider from '@/components/static/sponsorSlider.vue'
 export default {
     components:{
         slider 
+    },
+    data(){
+      return {
+        products: [],
+        url: 'https://api.risingwork.com/',
+        top_rated_products: ''
+      }
+    },
+    methods:{
+      async getTrending(){
+            try {
+                let res = await this.$http.get('/trending-products') 
+                this.products = res.data.trending_products
+                console.log(res.data.trending_products);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async getTopRated(){
+            try {
+                let res = await this.$http.get('/top-rated-products') 
+                this.top_rated_products = res.data.top_rated_products
+                console.log(res.data.top_rated_products);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        viewProduct(slug){ 
+            this.$router.push({ name: 'product-detail', params: { slug } })
+        },
+    },
+    mounted(){
+      this.getTrending()
+      this.getTopRated()
     }
     
 }

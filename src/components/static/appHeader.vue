@@ -13,21 +13,21 @@
             <button class="btn--main" @click="goToLogin">Login</button>
             <button class="btn--main" @click="goToRegister">Register</button>
         </div>
-        <div class="ml-auto d-flex" style="gap:20px" v-else>
-          <div class="cart">
+        <div class="ml-auto">
+          <!-- <div class="cart">
             <span class="material-icons text-white">
               shopping_bag
             </span>
             <div class="notification">
               {{ user.cart_item.length }}
             </div>
-          </div>
+          </div> -->
           
           <div class="dropdown ">
             <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
              <span class="text-white material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
-            account_circle_full
-          </span>
+              account_circle_full
+            </span>
             <!-- </button> -->
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>

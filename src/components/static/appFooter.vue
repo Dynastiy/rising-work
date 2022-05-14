@@ -31,8 +31,7 @@
                   Get a Design
               </h4>
               <ul class="list-unstlyed">
-                  <li> <a target="_blank" href="https://samzuga.exchange/">Exchange</a> </li>
-                  <li> <a target="_blank" href="https://africanapp.store/"> P2P</a></li>
+                  <li v-for="product in categories.data" :key="product.id"> <router-link :to="'/services/'+ product.slug" class="text-capitalize"> {{ product.name }} </router-link> </li>
               </ul>
           </div>
           <div class="col-md-2 col-md-3">
@@ -60,5 +59,28 @@
 </template>
 
 <script>
-  
+export default {
+  data(){
+    return {
+      categories: '',
+    }
+  },
+  methods: {
+    async getCategories(){
+      try {
+        let res = await this.$http('/trending-products')
+        console.log(res.data.trending_products);
+        this.categories = res.data.trending_products
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  mounted(){
+    this.getCategories();
+  },
+  computed:{
+    
+  }
+}
 </script>
