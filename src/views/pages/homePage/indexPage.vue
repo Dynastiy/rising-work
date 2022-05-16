@@ -5,7 +5,7 @@
         <div class="container py-5">
           <div class="row align-items-center">
             <div class="col-md-6">
-              <h1 class="mb-4" data-aos="fade-up-right">World Class <span>design</span> at your service.</h1>
+              <h1 class="mb-4" data-aos="fade-up-right">World Class <span style="color:var(--secondary-color)">design</span> at your service.</h1>
               <p class="text-secondary">
                 We make it easy to work with professional, creative experts from
                 around the world and build your brand through custom, memorable
