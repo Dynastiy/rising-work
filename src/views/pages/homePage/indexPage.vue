@@ -1,17 +1,25 @@
 <template>
   <div>
     <div class="home--page mb-4">
-      <div class="hero--section text-center ">
-        <div class="container">
-          <h1>World Class design at your service.</h1>
-          <p class="w-50 mx-auto">
-            We make it easy to work with professional, creative experts from
-            around the world and build your brand through custom, memorable
-            design.
-          </p>
-          <div class="input--field">
-            <input type="search" name="" id="" />
-            <input type="button" value="Get Started" />
+      <div class="hero--section  ">
+        <div class="container py-5">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <h1 class="mb-4" data-aos="fade-up-right">World Class <span>design</span> at your service.</h1>
+              <p class="text-secondary">
+                We make it easy to work with professional, creative experts from
+                around the world and build your brand through custom, memorable
+                design.
+              </p>
+              <div class="input--field">
+                <input type="search" name="" id="" />
+                <input type="button" value="Get Started" />
+              </div>
+            </div>
+
+            <div class="col-md-6 text-right" data-aos="fade-down-left">
+              <img src="@/assets/img/hero-image.svg" alt="">
+            </div>
           </div>
         </div>
       </div>

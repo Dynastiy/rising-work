@@ -3,7 +3,7 @@
 @import url("@/assets/css/bootstrap.min.css");
 
 /* Font */
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
 @import url('@/assets/font/stylesheet.css');
 *,
 html {
@@ -38,12 +38,12 @@ html {
 }
 
 :root {
-    /* --primary-font-family: 'Lato', sans-serif; */
-    --primary-font-family: GT Walsheim Pro, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, Tahoma, sans-serif !important;
+    --primary-font-family: 'DM Sans', sans-serif;;
+    /* --primary-font-family: GT Walsheim Pro, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, Tahoma, sans-serif !important; */
     /* Brand Colors  */
     --main-color: #000407;
-    --primary-color: #edb518;
-    --secondary-color: #edb518;
+    --primary-color: #00c0a3;
+    --secondary-color: #00c0a3;
     --accent-color: #f5f7f7;
     /* Gray Shades  */
     --gray-100: #F9F8F9;

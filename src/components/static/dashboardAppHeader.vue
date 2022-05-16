@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class="dashboard--header">
-      <div class="container py-4">
+      <div class="container py-5">
         <div class="top d-flex justify-content-between align-items-center mb-4">
             <div>
-              <router-link to="/" class="text-dark font-weight-bold">LOGO</router-link>
+              <router-link to="/" class="text-dark font-weight-bold">
+                <img src="@/assets/img/logo.svg" width="120" alt="" srcset=""> 
+              </router-link>
             </div>
             <div class="d-flex align-items-center" style="gap:5px">
               <div>
@@ -17,30 +19,30 @@
             </div>
         </div>
 
-        <div class="main--menu">
+        <div class="main--menu mt-5">
           <ul class="list-unstyled d-flex align-items-center p-2" style="gap:20px">
             <li>
-              <router-link to="/dashboard" class="text-dark">
+              <router-link to="/dashboard" class="text-white">
                 Dashboard
               </router-link>
             </li>
             <li>
-              <router-link class="text-dark" to="/orders">Orders</router-link>
+              <router-link class="text-white" to="/orders">Orders</router-link>
             </li>
             <li>
-              <router-link to="/profile" class="text-dark">Profile</router-link>
+              <router-link to="/profile" class="text-white">Profile</router-link>
             </li>
           </ul>
         </div>
 
         <!-- User Greeting -->
-        <div class="mt-4">
+        <div class="mt-5">
           <h3 class="text-white">
             Good Morning, {{ getUser.first_name }} {{ getUser.last_name }}
           </h3>
           <div class="mt-3">
             <p>Welcome to your account dashboard</p>
-            <p class="small">Check out Product Categories. Click <router-link to="/categories">categories</router-link>  </p>
+            <p class="small">Check out Product Categories. Click <router-link class="text-white" to="/categories">Categories</router-link>  </p>
           </div>
         </div>
       </div>
