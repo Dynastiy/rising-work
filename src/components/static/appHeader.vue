@@ -61,18 +61,14 @@
           <li>
             <router-link to="/categories">Categories</router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/">How It Works</router-link>
-          </li>
+          </li> -->
           <li>
             <router-link to="/dashboard">Dashboard</router-link>
           </li>
-          <li>
-            <router-link to="sign-in">Login</router-link>
-          </li>
-          <li>
-            <router-link to="register">Register</router-link>
-          </li>
+            <li><a href="javascript:void(0)"><button class="btn--main" @click="goToLogin">Login</button></a></li>
+            <li><a href="javascript:void(0)"><button class="btn--main" @click="goToRegister">Register</button></a></li>
           <li>
             <a class="" href="javascript:void(0)" @click="logout">Logout</a>
           </li>

@@ -188,12 +188,12 @@ export default {
             } catch (error) {
                 console.log(error);
                 this.$toastify({
-          text: `Select only one feature please`,
-          className: "info",
-          style: {
-            background: "red",
-          },
-        }).showToast();
+                text: `Select only one feature please`,
+                className: "info",
+                style: {
+                    background: "red",
+                },
+                }).showToast();
             }
         },
         async addToCart(){
