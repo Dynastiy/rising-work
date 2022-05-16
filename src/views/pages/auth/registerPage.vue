@@ -224,7 +224,17 @@ export default {
             background: "green",
           },
         }).showToast();
-        this.$router.push('/sign-in')
+        // this.$router.push('/sign-in')
+
+        let return_url = this.$route.query.return_url
+        if (return_url === undefined) {
+          this.$router.push('/sign-in')
+        }
+        else{
+          // this.$router.push(`/sign-in/${return_url}`)
+          this.$router.push({ name: 'login', query: {return_url: return_url } })
+        }
+
       } catch (error) {
         // console.log(error);
         // console.log(error.response.data.errors);

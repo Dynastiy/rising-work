@@ -199,7 +199,8 @@ export default {
         async addToCart(){
             if(!this.$store.getters.isLoggedIn){
                 let url = '/cart/checkout'
-                this.$router.push({ name: 'login', query: { return_url: url } })
+                this.$router.push({ name: 'login', query: {return_url: url } })
+                // this.$router.push({ name: 'login' })
             }
             else {
                 this.addItemToCart();

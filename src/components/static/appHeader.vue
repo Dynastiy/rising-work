@@ -13,7 +13,7 @@
             <button class="btn--main" @click="goToLogin">Login</button>
             <button class="btn--main" @click="goToRegister">Register</button>
         </div>
-        <div class="ml-auto">
+        <div class="ml-auto" v-else>
           <!-- <div class="cart">
             <span class="material-icons text-white">
               shopping_bag

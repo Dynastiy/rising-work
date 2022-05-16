@@ -3,7 +3,7 @@
         <div>
             <div class="checkout my-4 ">
                 <div class="container">
-                    <div class="checkout--item shadow-lg bg-white p-3">
+                    <div v-if="cart.length === 0" class="checkout--item shadow-lg bg-white p-3">
                        <div>
                             <div class="d-flex" style="gap:15px">
                                 <div class="product--image">
@@ -50,6 +50,13 @@
                             </div>
                        </div>
                     </div>
+                    <div v-else>
+                        <div class="d-flex mb-3" style="gap:10px"> <p><span class="cancelled">1</span> Pending Item </p>
+                        <p><span style="color:var(--secondary-color)" role="button">Add to cart</span></p>
+                        </div>
+                        <h2>No Cart Items Here Yet</h2>
+                    </div>
+                    
                 </div>
             </div>
         </div>

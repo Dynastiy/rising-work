@@ -73,7 +73,7 @@
             </div>
           </form>
           <div class="text-center pt-2">
-            <span class=""> Please <router-link to="/register" class="text-info font-weight-bold">Register</router-link> if you do not have an account </span>
+            <span class=""> Please <a @click="goToRegister" href="javascript:void(0)" class="text-info font-weight-bold">Register</a> if you do not have an account </span>
           </div>  
           <div class="text-center pt-2">
             <span class=""> Go back to <router-link to="/" class="text-info font-weight-bold">Homepage</router-link> </span>
@@ -120,8 +120,8 @@ export default {
           this.$router.push('/dashboard')
         }
         else{
-          // this.$router.push(`${return_url}`)
-          this.$router.go(-1)
+          this.$router.push(`${return_url}`)
+          // this.$router.push('/')
         }
         
         console.log(return_url);
@@ -139,6 +139,19 @@ export default {
         this.payload = {}
       this.loading = false;
     },
+    goToRegister(){
+       // checks if it is from a redirect url and redirect to the next url else, redirects to dashboard
+        let return_url = this.$route.query.return_url 
+        if (return_url === undefined) {
+          this.$router.push('/register')
+        }
+        else{
+          let url = '/cart/checkout'
+          this.$router.push({ name: 'Register', query: { return_url: url, from: 'login' } })
+          // this.$router.push('/')
+        }
+      
+    }
   },
   async created() {
     
