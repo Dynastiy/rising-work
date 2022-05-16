@@ -47,16 +47,20 @@ instance.interceptors.response.use(function(response) {
     return response;
 }, function(error) {
 
-    console.log(error.response.data.detail);
+    console.log(error.response.data.message);
     // console.log(error);
     Toastify({
-        text: error.response.data.detail,
+        text: error.response.data.message,
         className: "info",
         style: {
             background: "red",
         }
     }).showToast();
         
+    if (error.response.data.message == 'Unauthenticated.' ) {
+        alert("Unauntheticated");
+        store.state.token = ''
+    }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

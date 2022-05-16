@@ -115,6 +115,29 @@
                 </section>
             </div>
         </div>
+
+        <div class="container">
+            <!-- Feature Products  -->
+            <div class="featured--products mb-4 container">
+                <div class="mt-4">
+                <h2 class="mb-4">Related Services</h2>
+                <div class="content">
+                    <div v-for="product in products.data" :key="product.id">
+                        <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
+                            <div>
+                                <hr class="bg-white w-50" style="height:2px">
+                                <h3 class="text-capitalize"> {{ product.name }} </h3>
+                                <h5>Start at ${{product.price}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
+                arrow_forward
+                </span></router-link>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -146,6 +169,8 @@ export default {
             plan_id: '',
             feature_id: '',
             total_amount:'',
+            products: [],
+            url: 'https://api.risingwork.com/',
         }
     },
     methods:{
@@ -157,6 +182,15 @@ export default {
             this.selected_plan = plan.price;
             console.log(this.selected_plan);
             this.addPrice()
+        },
+        async getTrending(){
+            try {
+                let res = await this.$http.get('/trending-products') 
+                this.products = res.data.trending_products
+                console.log(res.data.trending_products);
+            } catch (error) {
+                console.log(error);
+            }
         },
         addPrice(){
             console.log(this.cartItem);
@@ -198,9 +232,19 @@ export default {
         },
         async addToCart(){
             if(!this.$store.getters.isLoggedIn){
-                let url = '/cart/checkout'
-                this.$router.push({ name: 'login', query: {return_url: url } })
+                for (let item of this.cartItem) {
+                // sub_array.push(item.id);
+                this.feature_id = item.id
+                // super_array.push(sub_array.slice(0));
+            }
+                let payload = {};
+                payload = {product_id: this.product.id, plan_id: this.plan_id, product_name: this.product.name, feature_id: this.feature_id, total_amount: this.total_amount}
+                console.log(payload);
                 // this.$router.push({ name: 'login' })
+                this.$store.dispatch("addCart", { payload });
+                let url = '/cart/checkout'
+                this.$router.push({ name: 'login', query: {return_url: url } });
+                
             }
             else {
                 this.addItemToCart();
@@ -242,6 +286,7 @@ export default {
     },
     mounted(){
             this.getProductId()
+            this.getTrending()
     },
     computed:{
       loggedIn(){
