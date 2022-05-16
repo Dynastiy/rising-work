@@ -34,7 +34,7 @@
       <!-- Feature Products  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h2 class="mb-4">Trending Services</h2>
+          <h1 class="mb-4"><span style="color: var(--secondary-color)">Trending</span> Services</h1>
           <div class="content">
             <div v-for="product in products.data" :key="product.id">
                 <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
@@ -67,7 +67,7 @@
         <!-- Trending Professional Services  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h2 class="mb-4">Top rated Professional Services</h2>
+          <h1 class="mb-4"><span style="color: var(--secondary-color)">Top Rated</span> Professional Services</h1>
           <div class="content">
             <div v-for="product in top_rated_products" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"
             :key="product.key" class="creative--services creative--services1" data-aos="fade-up-right"
