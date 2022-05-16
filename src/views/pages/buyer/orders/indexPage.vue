@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>User Dashboard</h2>
+        <!-- <h2>User Dashboard</h2> -->
         <!-- Analytics  -->
         <section class="mt-4 analytics">
             <div class="price--options-1 price--options">

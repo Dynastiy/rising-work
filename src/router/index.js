@@ -44,6 +44,24 @@ const routes = [{
             component: () =>
                 import ( /* webpackChunkName: "about" */ '../views/pages/homePage/checkOut.vue')
         },
+        {
+            path: '/success-payment',
+            name: 'success-payment',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import ( /* webpackChunkName: "about" */ '../views/pages/homePage/successPayment.vue')
+        },
+        {
+            path: '/cancel-payment',
+            name: 'cancel-payment',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import ( /* webpackChunkName: "about" */ '../views/pages/homePage/cancelPayment.vue')
+        },
      ]
     },
     {
@@ -58,7 +76,7 @@ const routes = [{
                     import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/indexPage.vue')
             },
             {
-                path: '/completed',
+                path: '/orders',
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
@@ -66,12 +84,12 @@ const routes = [{
                     import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/completedOrders.vue')
             },
             {
-                path: '/pending',
+                path: '/profile',
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/orders/pendingOrders.vue')
+                    import ( /* webpackChunkName: "about" */ '../views/pages/buyer/navigation/profilePage.vue')
             },
             {
                 path: '/delivered',

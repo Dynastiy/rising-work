@@ -1,89 +1,80 @@
 <template>
-    <div>
-        <div class="dashboard-app-header shadow-sm" id="dashboard--header">
-            <div class="top--nav d-flex align-items-center justify-content-between">
-                  <div class="menu--open">
-                    <span class="material-icons" id="tog" style="font-size: 36px">
-                        menu
-                    </span>
-                </div>
-                <div class="search--field d-flex align-items-center">
-                    <span class="material-icons">
-                        search
-                    </span>
-                    <input type="search" name="" id="" placeholder="Search . . . ">
-                    
-                </div>
-                
-                <div class="d-flex align-items-center" style="gap:20px">
-                <span class="material-icons" role="button">
-                        shopping_bag
-                    </span>
-                    <span class="material-icons">
-                        notifications
-                    </span>
-                    <span class="user--avatar j">
-                       J
-                    </span>
-                    <span class="d-lg-block">Vue Js</span>
-                </div>
+  <div>
+    <div class="dashboard--header">
+      <div class="container py-4">
+        <div class="top d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <router-link to="/" class="text-dark font-weight-bold">LOGO</router-link>
+            </div>
+            <div class="d-flex align-items-center" style="gap:5px">
+              <div>
+                <span class="user--avatar" :class="getUser.first_name.charAt(0)"> {{getUser.first_name.charAt(0) }} </span>
+              </div>
+              <div>
+                <h5 class="text-dark"> {{ getUser.first_name }} {{ getUser.last_name }} </h5>
+                <p class="small m-0" role="button" @click="logout">Logout</p>
+              </div>
             </div>
         </div>
 
-        <!-- App Drawer for MObile  -->
-        <div class="main--app--drawer shadow-lg" id="side-bar">
-            <div class="menu--close text-right p-3">
-                <span class="material-icons" style="font-size: 36px; color: #fff">
-                    close
-                </span>
-            </div>
-      <div class="top--image text-center">
-        <!-- <router-link to="/"><img src="@/assets/img/icon.svg" width="80" alt="" /></router-link> -->
-      </div>
-      <ul class="list-unstyled">
-        <li v-for="item in menu" :key="item.id">
-          <span class="menu--header"> {{ item.menu_header }} </span>
-          <ul v-if="item.sub_menu">
-            <li v-for="sub_item in item.sub_menu" :key="sub_item.id">
-              <router-link :to="sub_item.url" class="align-items-center d-flex" style="gap:15px">
-                <span class="material-icons">
-                {{ sub_item.icon }}
-                </span>
-                <span> {{ sub_item.menu_item }} </span>
+        <div class="main--menu">
+          <ul class="list-unstyled d-flex align-items-center p-2" style="gap:20px">
+            <li>
+              <router-link to="/dashboard" class="text-dark">
+                Dashboard
               </router-link>
             </li>
+            <li>
+              <router-link class="text-dark" to="/orders">Orders</router-link>
+            </li>
+            <li>
+              <router-link to="/profile" class="text-dark">Profile</router-link>
+            </li>
           </ul>
-        </li>
-      </ul>
+        </div>
+
+        <!-- User Greeting -->
+        <div class="mt-4">
+          <h3 class="text-white">
+            Good Morning, {{ getUser.first_name }} {{ getUser.last_name }}
+          </h3>
+          <div class="mt-3">
+            <p>Welcome to your account dashboard</p>
+            <p class="small">Check out Product Categories. Click <router-link to="/categories">categories</router-link>  </p>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+
+     <!-- Logout Confirmation Box -->
+      <Logout v-show="logout_confirmation" @close="closeConfirmBox"/>
+
+  </div>
 </template>
 
 <script>
-import menu_items from "@/api/menu.js";
+import Logout from '@/components/confirmLogout.vue'
 export default {
-  data: () => {
-    return {
-      menu: menu_items,
-    };
+  components:{
+    Logout
   },
-   mounted(){
-        const toggller = document.getElementById("tog");
-        const sidee = document.getElementById('side-bar');
-        // const closeMenu = document.getElementById('close-menu');
-        const bodyEl = document.getElementsByTagName('body')[0]
-        document.onclick = function(e) {
-          if(e.target.id !== "tog" && e.target.id !== "side-bar"){
-            sidee.classList.remove('active');
-            bodyEl.classList.remove("active");
-          }
-        }
-        toggller.onclick = function(){
-        sidee.classList.toggle('active');
-        bodyEl.classList.toggle("active")
-        }
-        
+  data(){
+    return{
+      logout_confirmation: false,
     }
-     
+  },
+  methods:{
+    logout() {
+        this.logout_confirmation = !this.logout_confirmation
+        },
+        closeConfirmBox() {
+        this.logout_confirmation = !this.logout_confirmation
+        },
+  },
+  computed:{
+      getUser(){
+        return this.$store.getters.getUser
+      }
+    },
 }
 </script>

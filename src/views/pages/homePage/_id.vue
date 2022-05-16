@@ -35,9 +35,11 @@
                                 </div>
                                 <div>
                                     <label  for="" class="m-0 text-dark">Select Additional Features</label>
-                                    <div class="d-flex align-items-center" style="gap:10px" v-for="feature in product.features" :key="feature.id">
+                                    <div class="d-flex align-items-center mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
                                         <input type="checkbox" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
-                                        <label :for="feature.id" class="m-0 text-capitalize"> {{ feature.name }} </label>
+                                        <label :for="feature.id" class="m-0 text-capitalize d-flex " style="gap:30px"> <span>
+                                            {{ feature.name }}
+                                        </span> <span>${{ feature.price }}</span> </label>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +142,8 @@ export default {
             cartItem: [],
             selected_plan: '',
             isActive: true,
-            plan_id: ''
+            plan_id: '',
+            feature_id: ''
         }
     },
     methods:{
@@ -162,19 +165,35 @@ export default {
             this.total_amount = totalPrice + this.selected_plan;
             console.log(totalPrice);
         },
-        addToCart(){
-            // let formData = new FormData()
-            // formData.append("product_id", this.product.id)
-            // formData.append("")
+        async addItemToCart(){
+            // var sub_array = [];
+            for (let item of this.cartItem) {
+                // sub_array.push(item.id);
+                this.feature_id = item.id
+                // super_array.push(sub_array.slice(0));
+            }
+            let formData = new FormData()
+            formData.append("product_id", this.product.id)
+            formData.append("plan_id", this.plan_id)
+            formData.append("product_name", this.product.name)
+            formData.append("feature_id", this.feature_id)
+            formData.append("total_amount", this.total_amount)
+            try {
+                let res = await this.$axios.post('/add-to-cart', formData)
+                console.log(res);
+                this.$router.push('/cart/checkout')
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async addToCart(){
             if(!this.$store.getters.isLoggedIn){
                 let url = '/cart/checkout'
                 this.$router.push({ name: 'login', query: { return_url: url } })
             }
-            this.cart.push(
-            this.cartItem,
-            this.plan_id, this.total_amount );
-            console.log(this.cart);
-            this.$router.push('/cart/checkout')
+            else {
+                this.addItemToCart();
+            }
         },
         async getProductId(){
             try {

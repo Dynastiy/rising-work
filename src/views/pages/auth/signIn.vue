@@ -120,7 +120,8 @@ export default {
           this.$router.push('/dashboard')
         }
         else{
-          this.$router.push(`${return_url}`)
+          // this.$router.push(`${return_url}`)
+          this.$router.go(-1)
         }
         
         console.log(return_url);

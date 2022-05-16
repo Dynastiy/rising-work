@@ -66,7 +66,7 @@
             grid-gap: 20px;
         }
         .featured--products .content {
-            grid-template-columns: auto;
+            grid-template-columns: 1fr 1fr;
         }
         .create-post-content {
             width: 80%;
@@ -84,8 +84,8 @@
         .mobile--nav a {
             font-size: 1.2rem;
             display: block;
-            margin-bottom: 2rem;
-            padding: 1rem 3rem;
+            margin-bottom: 1.2rem;
+            padding: 0.3rem 2rem;
         }
         .mobile--nav .router-link-exact-active {
             background-color: var(--secondary-color);
