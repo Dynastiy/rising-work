@@ -26,7 +26,7 @@
                             </div>
                             <div class="mt-3">
                                 <div class="select--plan mb-3">
-                                    <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan </label>
+                                    <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
                                    <div class="d-lg-flex" style="gap:20px">
                                        <div class="plan--selector mb-2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
                                             <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
@@ -53,7 +53,7 @@
                                 <div>
                                     <h1>${{ product.price }} </h1>
                                 </div>
-                                <div role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
+                                <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
                                         shopping_cart
                                     </span>
@@ -129,6 +129,7 @@ export default {
      data(){
         return {
             nairaFilter, percentFilter, percentageFilter, timeStamp,
+            addItem: false,
             product: {},
             slug: this.$route.params.slug,
             item_id: '',
@@ -143,12 +144,14 @@ export default {
             selected_plan: '',
             isActive: true,
             plan_id: '',
-            feature_id: ''
+            feature_id: '',
+            total_amount:'',
         }
     },
     methods:{
         selectPlan(plan){
             this.isActive = ( this.isActive === plan.id ) ? null : plan.id;
+            this.addItem = true;
             console.log(plan);
             this.plan_id = plan.id
             this.selected_plan = plan.price;
@@ -177,13 +180,20 @@ export default {
             formData.append("plan_id", this.plan_id)
             formData.append("product_name", this.product.name)
             formData.append("feature_id", this.feature_id)
-            formData.append("total_amount", this.total_amount)
+            formData.append("total_amount", Number(this.total_amount))
             try {
                 let res = await this.$axios.post('/add-to-cart', formData)
                 console.log(res);
                 this.$router.push('/cart/checkout')
             } catch (error) {
                 console.log(error);
+                this.$toastify({
+          text: `Select only one feature please`,
+          className: "info",
+          style: {
+            background: "red",
+          },
+        }).showToast();
             }
         },
         async addToCart(){

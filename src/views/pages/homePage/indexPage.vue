@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="home--page">
+    <div class="home--page mb-4">
       <div class="hero--section text-center ">
         <div class="container">
           <h1>World Class design at your service.</h1>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div class="checkout mt-4 ">
+            <div class="checkout my-4 ">
                 <div class="container">
                     <div class="checkout--item shadow-lg bg-white p-3">
                        <div>
