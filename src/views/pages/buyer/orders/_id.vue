@@ -1,6 +1,6 @@
 <template>
     <div>
-      <section class="">
+      <section class="my-4">
            <div class="d-flex align-items-center justify-content-between my-3">
             <h3 class="text-bold order-header text-uppercase">Order #{{ createRef(id) }}</h3>
             <div class="orders--header my-4">
@@ -26,7 +26,7 @@
                         <li> <a class="nav--item2" href="javascript:void(0)" @click="requirements">Requirements</a> </li>
                         <!-- <li> <a class="nav--item2" href="javascript:void(0)" @click="completed">Delivery Unit</a> </li> -->
                         <li> <a class="nav--item2" href="javascript:void(0)" @click="delivered">Delivered Files</a> </li>
-                        <li> <a class="nav--item2" href="javascript:void(0)" @click="messages">Cancelled Orders</a> </li>
+                        <li> <a class="nav--item2" href="javascript:void(0)" @click="messages">Messages</a> </li>
                     </ul>
                 </div>
                 </div>

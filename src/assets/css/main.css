@@ -1,6 +1,6 @@
 @import url('@/assets/css/partials.css');
 body {
-    background-color: var(--accent-color);
+    /* background-color: var(--accent-color); */
 }
 
 body.active {
@@ -644,6 +644,7 @@ body.active {
 }
 .nav--item.active {
     background-color: var(--secondary-color);
+    color: #fff;
 }
 .select--more {
     background-color: #fff;
@@ -884,4 +885,37 @@ body.active {
     height: 300px;
     object-fit: cover;
     object-position: top;
+}
+.chat--area {
+    border: 1px solid var(--gray-400);
+}
+.chat--area input {
+    border: none;
+    width: 90%;
+    padding: 0.7rem;
+    outline: none;
+    /* border-radius: 10px; */
+}
+.chat--area .chat--screen {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 2rem;
+    margin-left: auto;
+}
+.chat--area .message--area {
+    background-color: var(--gray-400);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.message--content {
+    background-color: var(--gray-200);
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: max-content;
+    margin-left: auto;
+}
+.message--content p {
+    word-break: normal;
 }

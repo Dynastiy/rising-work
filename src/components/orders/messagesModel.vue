@@ -1,9 +1,50 @@
 <template>
     <div>
         <div>
-            <div class="messages">
-                Messages
+            <div class="messages mt-4">
+                <div class="chat--area">
+                    <div class="chat--screen">
+                        <div class="message--content" v-for="chat in chats" :key="chat.id">
+                            <p>{{ chat.message }}</p>
+                            <small class="text-muted" style="font-size: 0.7rem"> {{ timeStamp(chat.created_at) }} </small>
+                        </div>
+                    </div>
+                    <div class="message--area" >
+                        <input type="text" placeholder="Write Something">
+                        <div style="background-color: var(--primary-color);" class="d-flex align-items-center p-2" role="button" @click="sendMessage()"> 
+                            <IconComponent icon="fluent:send-24-filled" style="font-size:20px; color: #fff"/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {createRef, timeStamp} from '@/plugins/filters'
+export default {
+    props:['chats'],
+    data(){
+        return{
+            createRef, timeStamp,
+            payload: {
+                
+            }
+        }
+    },
+    sendMessage(){
+        this.$axios.post('/send-message', payload)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+        .finally(()=>{
+            this.$emit('reload')
+        })
+    }
+}
+</script>
+

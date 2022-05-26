@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import http from 'axios'
+import http from '@/plugins/http'
 
 
 import AOS from 'aos'

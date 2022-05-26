@@ -12,7 +12,7 @@
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
-                    <div class="body--content shadow-lg">
+                    <div class="body--content">
                         <div>
                             <Gallery :dataObj="dataObj"/>
                         </div>
@@ -51,7 +51,7 @@
 
                             <div class="d-flex align-items-center mt-4" style="gap:30px">
                                 <div>
-                                    <h1>${{ product.price }} </h1>
+                                    <h1 style="color: var(--primary-color)">${{ product.price }} </h1>
                                 </div>
                                 <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
@@ -98,7 +98,7 @@
                                         </div>
                                     </div>
                                     <!-- Add Review  -->
-                                    <div class="mt-4" v-show="loggedIn">
+                                    <!-- <div class="mt-4" v-show="loggedIn">
                                         
                                         <form action="" @submit.prevent="addReview">
                                             <div class="add--review">
@@ -109,7 +109,7 @@
                                             </div>
                                         </form>
                                         
-                                    </div>
+                                    </div> -->
                                 </div>
                             </section>
                 </section>

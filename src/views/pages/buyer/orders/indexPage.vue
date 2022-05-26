@@ -2,7 +2,7 @@
     <div>
         <!-- <h2>User Dashboard</h2> -->
         <!-- Analytics  -->
-        <section class="mt-4 analytics">
+        <section class="my-4 analytics">
             <div class="price--options-1 price--options">
                 <h6 class="text-muted text-uppercase small">Total Transactions</h6>
                 <div class="d-flex mt-3 justify-content-between">
@@ -51,7 +51,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Product</th>
-                                    <th scope="col">Package</th>
+                                    <th scope="col">Plan</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Status</th>
@@ -59,50 +59,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                 <tr>
-                                    <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <span class="cancelled">Cancelled</span> </td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                <tr>
-                                      <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <span class="completed">Completed</span> </td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                <tr>
-                                      <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <span class="pending">Pending</span> </td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <span class="cancelled">Cancelled</span> </td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <span class="cancelled">Cancelled</span> </td>
-                                    <td> <button class="view-more-button">View More</button> </td>
+                                <tr v-for="(order, index) in orders " :key="index">
+                                     <td> {{ index + 1 }} </td>
+                                     <td> {{ order.product_name }} </td>
+                                     <td>  {{ order.plan_name }} </td>
+                                    <td> ${{ order.total_amount }} </td>
+                                    <td> {{ timeStamp(order.created_at) }} </td>
+                                    <td> <span :class="order.status">{{ order.status }}</span> </td>
+                                    <td> <button class="view-more-button" @click="viewItem(order)">View More</button> </td>
                                 </tr>
                                 
                                 </tbody>
@@ -112,3 +76,31 @@
         </section>
     </div>
 </template>
+
+<script>
+
+import {createRef, timeStamp} from '@/plugins/filters'
+export default {
+    data(){
+        return{
+            createRef, timeStamp,
+            orders: []
+        }
+    },
+    methods:{
+        getOrders(){
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                console.log(res.data.user_orders_total.data[0].orders);
+                this.orders = res.data.user_orders_total.data[0].orders
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+    },
+    mounted() {
+    this.getOrders(); 
+  },
+}
+</script>

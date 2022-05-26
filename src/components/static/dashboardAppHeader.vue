@@ -38,7 +38,7 @@
         <!-- User Greeting -->
         <div class="mt-5">
           <h3 class="text-white">
-            Good Morning, {{ getUser.first_name }} {{ getUser.last_name }}
+            {{ greeting }}, {{ getUser.first_name }} {{ getUser.last_name }}
           </h3>
           <div class="mt-3">
             <p>Welcome to your account dashboard</p>
@@ -63,6 +63,7 @@ export default {
   data(){
     return{
       logout_confirmation: false,
+      greeting: null,
     }
   },
   methods:{
@@ -72,6 +73,22 @@ export default {
         closeConfirmBox() {
         this.logout_confirmation = !this.logout_confirmation
         },
+  },
+  mounted(){
+    var date = new Date();
+    var hours = date.getHours();
+    var greet;
+
+    if(hours < 12){
+      greet = "Good Morning";
+      this.greeting = greet
+    }else if(hours >= 12 && hours <= 17){
+      greet = "Good Afternoon";
+      this.greeting = greet
+    }else if(hours >= 17 && hours <= 24){
+      greet = "Good Evening";
+      this.greeting = greet
+    }
   },
   computed:{
       getUser(){

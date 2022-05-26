@@ -155,4 +155,7 @@
           .mobile-orders-header {
             display: block;
         }
+        .message--content {
+            width: auto;
+        }
     }

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <section class="">
+      <section class="my-4">
            <div class="d-flex align-items-center justify-content-between my-3">
             <h3 class="text-bold order-header">Orders</h3>
             <div class="orders--header my-4">
@@ -52,7 +52,7 @@
                                      <td> {{ order.product_name }} </td>
                                      <td>  {{ order.plan_name }} </td>
                                     <td> ${{ order.total_amount }} </td>
-                                    <td> {{ order.created_at }} </td>
+                                    <td> {{ timeStamp(order.created_at) }} </td>
                                     <td> <button class="view-more-button" @click="viewItem(order)">View More</button> </td>
                                 </tr>
                                 
@@ -65,9 +65,12 @@
 </template>
 
 <script>
+
+import {createRef, timeStamp} from '@/plugins/filters'
 export default {
     data(){
         return{
+            createRef, timeStamp,
             order_type: '',
             orders: []
         }
