@@ -149,4 +149,10 @@
           .select--plan {
               margin-bottom: 1rem;
           }
+          .orders--header{
+              display: none;
+          }
+          .mobile-orders-header {
+            display: block;
+        }
     }

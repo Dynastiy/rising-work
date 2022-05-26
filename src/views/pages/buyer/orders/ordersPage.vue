@@ -1,0 +1,187 @@
+<template>
+    <div>
+      <section class="">
+           <div class="d-flex align-items-center justify-content-between my-3">
+            <h3 class="text-bold order-header">Orders</h3>
+            <div class="orders--header my-4">
+                <div>
+                    <ul class="list-unstyled m-0"  id="myDIV">
+                        <li> <a class="nav--item active" href="javascript:void(0)" @click="all">All Orders</a> </li>
+                        <li> <a class="nav--item" href="javascript:void(0)" @click="pending">Pending Orders</a> </li>
+                        <li> <a class="nav--item" href="javascript:void(0)" @click="completed">Completed Orders</a> </li>
+                        <li> <a class="nav--item" href="javascript:void(0)" @click="delivered">Delivered Orders</a> </li>
+                        <li> <a class="nav--item" href="javascript:void(0)" @click="cancelled">Cancelled Orders</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mobile-orders-header">
+                <!-- Default dropleft button -->
+                <div class="btn-group dropleft">
+                <div class="orders--menu dropdown-toggle" type="button"  data-toggle="dropdown" aria-expanded="false">
+                    <IconComponent icon="dashicons:menu-alt" style="font-size:70px" />
+                </div>
+                <div class="dropdown-menu">
+                    <ul class="list-unstyled m-0"  id="myDIV2">
+                        <li> <a class="nav--item2 active2" href="javascript:void(0)" @click="all">All Orders</a> </li>
+                        <li> <a class="nav--item2" href="javascript:void(0)" @click="pending">Pending Orders</a> </li>
+                        <li> <a class="nav--item2" href="javascript:void(0)" @click="completed">Completed Orders</a> </li>
+                        <li> <a class="nav--item2" href="javascript:void(0)" @click="delivered">Delivered Orders</a> </li>
+                        <li> <a class="nav--item2" href="javascript:void(0)" @click="cancelled">Cancelled Orders</a> </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+           </div>
+             <div class="other--tables bg-white p-3 rounded-lg shadow-sm">
+                    <h5 class="font-weight-bold">{{ order_type }} Orders </h5>
+                    <div class="table-responsive">
+                            <table class="table table-centered table-nowrap mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Package</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr> <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr> <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr> <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                 <tr>
+                                     <td>EF34152645</td>
+                                     <td>Mug</td>
+                                     <td>Bronze</td>
+                                    <td>&#8358;230,000</td>
+                                    <td>24/12/2022</td>
+                                    <td> <button class="view-more-button">View More</button> </td>
+                                </tr>
+                                
+                                
+                                </tbody>
+                            </table>
+                    </div>
+            </div>
+      </section>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+            order_type: ''
+        }
+    },
+    methods:{
+        all(){
+            this.order_type = 'All'
+        },
+        pending(){
+            this.order_type = 'Pending'
+        },
+        completed(){
+            this.order_type = 'Completed'
+        },
+        cancelled(){
+            this.order_type = 'Cancelled'
+        },
+        delivered(){
+            this.order_type = 'Delivered'
+        }
+    },
+    mounted() {
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("nav--item");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
+
+    // FOr the orders Menu
+    var header2 = document.getElementById("myDIV2");
+    var btns2 = header2.getElementsByClassName("nav--item2");
+    for (var j = 0; j < btns2.length; j++) {
+      btns2[j].addEventListener("click", function () {
+        var current2 = document.getElementsByClassName("active2");
+        current2[0].className = current2[0].className.replace(" active2", "");
+        this.className += " active2";
+      });
+    } 
+  },
+  async created(){
+      this.all()
+  }
+}
+</script>

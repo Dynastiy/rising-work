@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import http from 'axios'
 
 
 import AOS from 'aos'
@@ -12,7 +13,7 @@ import '@/assets/css/media-query.css'
 
 import instance from '@/plugins/axios.js'
 
-import http from '@/plugins/http'
+// import http from '@/plugins/http'
 
 import { Icon } from '@iconify/vue2';
 
@@ -25,7 +26,10 @@ Vue.prototype.$toastify = toastify
 
 Vue.prototype.$axios = instance
 
-Vue.prototype.$http = http
+// Vue.prototype.$http = http
+    // Vue.use(http)
+
+    Vue.prototype.$http = http
     // Vue.use(http)
 
 Vue.config.ignoredElements = [/^ion-/]
