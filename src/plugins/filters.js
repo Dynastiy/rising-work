@@ -5,8 +5,12 @@ import moment from 'moment';
 
 const timeStamp = (value) => {
     if (value) {
-        return moment(String(value)).format('DD MMM YYYY hh:mm A')
+        return moment(String(value)).format('d/m/yyyy, hh:mm:ss A')
     }
+}
+
+const createRef = (value) => {
+    return !value ? '0' : (value).split("-").join("").slice(0,6)
 }
 
 const nairaFilter = (value) => {
@@ -25,4 +29,4 @@ const percentageFilter = (value) => {
     return !value ? '0%' : `₦{Number(value).toFixed(2) * 100}%`
 }
 
-export { nairaFilter, percentFilter, percentageFilter, timeStamp }
+export { createRef, nairaFilter, percentFilter, percentageFilter, timeStamp }

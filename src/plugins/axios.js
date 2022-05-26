@@ -2,6 +2,7 @@ import Vue from 'vue'
 import "toastify-js/src/toastify.css"
 import Toastify from 'toastify-js'
 import store from '../store'
+import router from '../router'
 
 Vue.use(Toastify)
 
@@ -58,8 +59,9 @@ instance.interceptors.response.use(function(response) {
     }).showToast();
         
     if (error.response.data.message == 'Unauthenticated.' ) {
-        alert("Unauntheticated");
-        store.state.token = ''
+        // alert("Unauntheticated");
+        store.state.token = '';
+        router.push('/sign-in')
     }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error

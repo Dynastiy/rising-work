@@ -17,7 +17,7 @@
             <div class="mobile-orders-header">
                 <!-- Default dropleft button -->
                 <div class="btn-group dropleft">
-                <div class="orders--menu dropdown-toggle" type="button"  data-toggle="dropdown" aria-expanded="false">
+                <div class="orders--menus" type="button"  data-toggle="dropdown" aria-expanded="false">
                     <IconComponent icon="dashicons:menu-alt" style="font-size:70px" />
                 </div>
                 <div class="dropdown-menu">
@@ -40,91 +40,21 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Product</th>
-                                    <th scope="col">Package</th>
+                                    <th scope="col">Plan</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
+                                <tr v-for="(order, index) in orders " :key="index">
+                                     <td> {{ index + 1 }} </td>
+                                     <td> {{ order.product_name }} </td>
+                                     <td>  {{ order.plan_name }} </td>
+                                    <td> ${{ order.total_amount }} </td>
+                                    <td> {{ order.created_at }} </td>
+                                    <td> <button class="view-more-button" @click="viewItem(order)">View More</button> </td>
                                 </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr> <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr> <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr> <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                 <tr>
-                                     <td>EF34152645</td>
-                                     <td>Mug</td>
-                                     <td>Bronze</td>
-                                    <td>&#8358;230,000</td>
-                                    <td>24/12/2022</td>
-                                    <td> <button class="view-more-button">View More</button> </td>
-                                </tr>
-                                
                                 
                                 </tbody>
                             </table>
@@ -138,7 +68,8 @@
 export default {
     data(){
         return{
-            order_type: ''
+            order_type: '',
+            orders: []
         }
     },
     methods:{
@@ -156,9 +87,24 @@ export default {
         },
         delivered(){
             this.order_type = 'Delivered'
+        },
+        viewItem(order){
+            this.$router.push({name: "order-details", params:{id: order.id } })
+        },
+        getOrders(){
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                console.log(res.data.user_orders_total.data[0].orders);
+                this.orders = res.data.user_orders_total.data[0].orders
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
         }
     },
     mounted() {
+    this.getOrders();
+
     var header = document.getElementById("myDIV");
     var btns = header.getElementsByClassName("nav--item");
     for (var i = 0; i < btns.length; i++) {

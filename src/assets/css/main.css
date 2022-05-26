@@ -861,3 +861,27 @@ body.active {
     color: var(--secondary-color);
     background-color: #00c0a310;
 }
+.main--button {
+    background: var(--primary-color);
+    padding: 0.3rem 1.2rem;
+    border-radius: 3px;
+    border: 1px solid var(--primary-color);
+    color: #fff;
+}
+.main--button:hover {
+    color:var(--primary-color);
+    background-color: #fff;
+}
+.requirements .top input[type='text'], .requirements .top textarea{
+    display: block;
+    width: 100%;
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid var(--gray-300);
+}
+.delivery--image {
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+}
