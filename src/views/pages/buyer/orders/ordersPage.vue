@@ -6,7 +6,7 @@
             <div class="orders--header my-4">
                 <div>
                     <ul class="list-unstyled m-0"  id="myDIV">
-                        <li> <a class="nav--item active" href="javascript:void(0)" @click="all">All Orders</a> </li>
+                        <li> <a class="nav--item active" href="javascript:void(0)" @click="all">In Progress Orders</a> </li>
                         <li> <a class="nav--item" href="javascript:void(0)" @click="pending">Pending Orders</a> </li>
                         <li> <a class="nav--item" href="javascript:void(0)" @click="completed">Completed Orders</a> </li>
                         <li> <a class="nav--item" href="javascript:void(0)" @click="delivered">Delivered Orders</a> </li>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="dropdown-menu">
                     <ul class="list-unstyled m-0"  id="myDIV2">
-                        <li> <a class="nav--item2 active2" href="javascript:void(0)" @click="all">All Orders</a> </li>
+                        <li> <a class="nav--item2 active2" href="javascript:void(0)" @click="all">In Progress Orders</a> </li>
                         <li> <a class="nav--item2" href="javascript:void(0)" @click="pending">Pending Orders</a> </li>
                         <li> <a class="nav--item2" href="javascript:void(0)" @click="completed">Completed Orders</a> </li>
                         <li> <a class="nav--item2" href="javascript:void(0)" @click="delivered">Delivered Orders</a> </li>
@@ -72,24 +72,35 @@ export default {
         return{
             createRef, timeStamp,
             order_type: '',
-            orders: []
+            orders: [],
+            order_data: '',
         }
     },
     methods:{
         all(){
-            this.order_type = 'All'
+            this.order_type = 'In Progress'
+            this.order_data = 'inprogress_orders'
+            this.getOrders();
         },
         pending(){
             this.order_type = 'Pending'
+            this.order_data = 'pending_orders'
+            this.getOrders();
         },
         completed(){
             this.order_type = 'Completed'
+            this.order_data = 'completed_orders'
+            this.getOrders();
         },
         cancelled(){
             this.order_type = 'Cancelled'
+            this.order_data = 'canceled_orders'
+            this.getOrders();
         },
         delivered(){
             this.order_type = 'Delivered'
+            this.order_data = 'delivered_orders'
+            this.getOrders();
         },
         viewItem(order){
             this.$router.push({name: "order-details", params:{id: order.id } })
@@ -97,8 +108,31 @@ export default {
         getOrders(){
             this.$axios.get('/user-dashboard')
             .then((res)=>{
-                console.log(res.data.user_orders_total.data[0].orders);
-                this.orders = res.data.user_orders_total.data[0].orders
+                // console.log(res.data.user.data[0]);
+                // this.orders = res.data.user.data[0]+(this.order_data)
+                // this.orders = res.data.user_orders_total.data[0].orders
+
+                switch (this.order_data) {
+                    case this.order_data === 'inprogress_orders':
+                        this.orders = res.data.user.data[0].inprogress_orders;
+                        console.log(this.orders);
+                        break;
+                    case this.order_data === 'pending_orders':
+                        this.orders = res.data.user.data[0].pending_orders;
+                        console.log(this.orders);
+                        break;
+                    case this.order_data === 'completed_orders':
+                        this.orders = res.data.user.data[0].completed_orders;
+                        console.log(this.orders);
+                        break;
+                    case this.order_data === 'canceled_orders':
+                        this.orders = res.data.user.data[0].canceled_orders;
+                        console.log(this.orders);
+                        break;
+                    case this.order_data === 'delivered_orders':
+                        this.orders = res.data.user.data[0].delivered_orders;
+                        console.log(this.orders);
+                }
             })
             .catch((err)=>{
                 console.log(err);

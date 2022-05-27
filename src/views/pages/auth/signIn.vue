@@ -128,7 +128,7 @@ export default {
         
       } catch (error) {
         console.log(error);
-        // this.errorMsg = error.response.error;
+        this.errorMsg = error.response.error;
       }
       this.loading = false;
       this.loading = true
