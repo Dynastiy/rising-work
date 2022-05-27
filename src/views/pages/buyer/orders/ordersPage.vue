@@ -47,13 +47,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(order, index) in orders " :key="index">
-                                     <td> {{ index + 1 }} </td>
-                                     <td> {{ order.product_name }} </td>
-                                     <td>  {{ order.plan_name }} </td>
-                                    <td> ${{ order.total_amount }} </td>
-                                    <td> {{ timeStamp(order.created_at) }} </td>
-                                    <td> <button class="view-more-button" @click="viewItem(order)">View More</button> </td>
+                                    <tr v-if="loading">
+                                        <div class="spinner-grow" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                            
+                                    </tr>
+                                    <tr v-else-if="!isEmpty" v-for="(order, index) in orders " :key="index">
+                                        <td> {{ index + 1 }} </td>
+                                        <td> {{ order.product_name }} </td>
+                                        <td>  {{ order.plan_name }} </td>
+                                        <td> ${{ order.total_amount }} </td>
+                                        <td> {{ timeStamp(order.created_at) }} </td>
+                                        <td> <button class="view-more-button" @click="viewItem(order)">View More</button> </td>
+                                    </tr>
+
+                                <tr v-else class=" text-danger">
+                                    <span  class="mt-3 text-danger">Nothing Here</span>
+                                        
                                 </tr>
                                 
                                 </tbody>
@@ -74,73 +85,100 @@ export default {
             order_type: '',
             orders: [],
             order_data: '',
+            loading: false,
+            empty: false,
         }
     },
     methods:{
         all(){
             this.order_type = 'In Progress'
             this.order_data = 'inprogress_orders'
-            this.getOrders();
-        },
-        pending(){
-            this.order_type = 'Pending'
-            this.order_data = 'pending_orders'
-            this.getOrders();
-        },
-        completed(){
-            this.order_type = 'Completed'
-            this.order_data = 'completed_orders'
-            this.getOrders();
-        },
-        cancelled(){
-            this.order_type = 'Cancelled'
-            this.order_data = 'canceled_orders'
-            this.getOrders();
-        },
-        delivered(){
-            this.order_type = 'Delivered'
-            this.order_data = 'delivered_orders'
-            this.getOrders();
-        },
-        viewItem(order){
-            this.$router.push({name: "order-details", params:{id: order.id } })
-        },
-        getOrders(){
+            this.loading = true
             this.$axios.get('/user-dashboard')
             .then((res)=>{
-                // console.log(res.data.user.data[0]);
-                // this.orders = res.data.user.data[0]+(this.order_data)
-                // this.orders = res.data.user_orders_total.data[0].orders
-
-                switch (this.order_data) {
-                    case this.order_data === 'inprogress_orders':
-                        this.orders = res.data.user.data[0].inprogress_orders;
-                        console.log(this.orders);
-                        break;
-                    case this.order_data === 'pending_orders':
-                        this.orders = res.data.user.data[0].pending_orders;
-                        console.log(this.orders);
-                        break;
-                    case this.order_data === 'completed_orders':
-                        this.orders = res.data.user.data[0].completed_orders;
-                        console.log(this.orders);
-                        break;
-                    case this.order_data === 'canceled_orders':
-                        this.orders = res.data.user.data[0].canceled_orders;
-                        console.log(this.orders);
-                        break;
-                    case this.order_data === 'delivered_orders':
-                        this.orders = res.data.user.data[0].delivered_orders;
-                        console.log(this.orders);
-                }
+                this.orders = res.data.user.data[0].inprogress_orders;
+                console.log(this.orders);
             })
             .catch((err)=>{
                 console.log(err);
             })
-        }
+            .finally(()=>{
+                this.loading = false
+            })
+        },
+        pending(){
+            this.order_type = 'Pending'
+            this.order_data = 'pending_orders'
+            this.loading = true
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                this.orders = res.data.user.data[0].pending_orders;
+                console.log(this.orders);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            .finally(()=>{
+                this.loading = false
+            })
+        },
+        completed(){
+            this.order_type = 'Completed'
+            this.order_data = 'completed_orders'
+            this.loading = true
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                this.orders = res.data.user.data[0].completed_orders;
+                console.log(this.orders);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            .finally(()=>{
+                this.loading = false
+            })
+        },
+        cancelled(){
+            this.order_type = 'Cancelled'
+            this.order_data = 'canceled_orders'
+            this.loading = true
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                this.orders = res.data.user.data[0].canceled_orders;
+                console.log(this.orders);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            .finally(()=>{
+                this.loading = false
+            })
+        },
+        delivered(){
+            this.order_type = 'Delivered'
+            this.order_data = 'delivered_orders'
+            this.loading = true
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                this.orders = res.data.user.data[0].delivered_orders;
+                console.log(this.orders);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            .finally(()=>{
+                this.loading = false
+            })
+        },
+        viewItem(order){
+            this.$router.push({name: "order-details", params:{id: order.id } })
+        },
+        // getOrders(){
+            
+        // }
     },
     mounted() {
-    this.getOrders();
+    // this.getOrders();
 
     var header = document.getElementById("myDIV");
     var btns = header.getElementsByClassName("nav--item");
@@ -165,6 +203,11 @@ export default {
   },
   async created(){
       this.all()
+  },
+  computed:{
+      isEmpty(){
+          return this.orders.length === 0
+      }
   }
 }
 </script>

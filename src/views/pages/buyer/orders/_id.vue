@@ -37,7 +37,7 @@
                     <Overview :overviewData="overviewData" v-show="data_link == 'Overview' "/>
                     <DeliveredFiles :deliveredFiles="deliveredFiles" v-show="data_link == 'Delivered Files' "/>
                     <Requirements :requirementsData="requirementsItem" v-show="data_link == 'Requirements' "/>
-                    <Messages :chats="chats" v-show="data_link == 'Messages' "/>
+                    <Messages :chats="chats" @reload="getOrder()" v-show="data_link == 'Messages' "/>
             </div>
       </section>
     </div>
