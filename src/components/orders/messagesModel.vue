@@ -28,23 +28,23 @@ export default {
     data(){
         return{
             createRef, timeStamp,
-            payload: {
+            // payload: {
                 
-            }
+            // }
         }
     },
-    sendMessage(){
-        this.$axios.post('/send-message', payload)
-        .then((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-        .finally(()=>{
-            this.$emit('reload')
-        })
-    }
+    // sendMessage(){
+    //     this.$axios.post('/send-message', payload)
+    //     .then((res)=>{
+    //         console.log(res);
+    //     })
+    //     .catch((err)=>{
+    //         console.log(err);
+    //     })
+    //     .finally(()=>{
+    //         this.$emit('reload')
+    //     })
+    // }
 }
 </script>
 
