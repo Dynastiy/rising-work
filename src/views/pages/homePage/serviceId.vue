@@ -15,41 +15,55 @@
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
-                    <div class="body--content">
-                        <div>
-                            <Gallery :dataObj="dataObj"/>
-                        </div>
-                       <div class="">
-                            <div class="item--details">
-                                <div class="">
-                                <h1 class="font-weight-bold text-uppercase">
+                    <div class="">
+                         <div class="mb-3">
+                                <h4 class="font-weight-bold text-capitalize">
                                     {{ product.name }}
-                                </h1>
+                                </h4>
                                 <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
                             </div>
-                            <div class="mt-3">
-                                
-                                <div class="select--plan mb-3">
-                                    <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
+                        <div>
+                            <GalleryMobile :dataObj2="dataObj2"/>
+                        </div>
+                       <div class="">
+                            <div class="item--details"> 
+                                <div class="mt-3 plan--div shadow-sm rounded-lg">
+                                    <div class="select--plan mb-3">
+                                        <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
+                                        <hr class="">
+                                    <div class="d-flex align-items-center">
+                                        <div class="plan--selector2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                                <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
+                                            </div>
+                                    </div>
                                     <hr class="">
-                                   <div class="d-lg-flex align-items-center" style="gap:20px">
-                                       <div class="plan--selector" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                            <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
-                                        </div>
-                                   </div>
-                                   <hr class="">
 
-                                   <div>
-                                       <h5>Plan Details</h5>
-                                   </div>
+                                    <div>
+                                        <h5>Plan Details</h5>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="description mt-4">
-                                
+                                <div class="">
+                                    <h5 class="m-0 text-dark mb-3">Select Additional Features</h5>
+
+                                    <div class="row align-items-center additional-items mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
+                                        <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                                        <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
+                                        <div class="">
+                                            <h4 class="">
+                                            {{ feature.name }}
+                                            </h4> 
+                                            <p class="text-secondary small mt-1">
+                                                {{ feature.name }}
+                                            </p>
+                                            <h3 class="mt-1">+${{ feature.price }}</h3>
+                                        </div> </label>
+                                    </div>
+                                    <div class="description mt-4">
                                 <h4 class="text-uppercase text-dark font-weight-bold"> about {{ product.name }} </h4>
                                 <p class="small text-capitalize"> {{ product.description }} </p>
                             </div>
-
+                        </div>
                             <div class="d-flex align-items-center mt-4" style="gap:30px">
                                 <div>
                                     <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
@@ -69,20 +83,8 @@
                     </div>
 
                     <hr>
-                   <section class="body-content container d-lg-flex mt-5 " style="gap:150px">
-                        <div class="">
-                            <h4 class="m-0 text-dark mb-3">Select Additional Features</h4>
-                            <div class="row align-items-center mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
-                                <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
-                                <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
-                                <div class="row">
-                                    <span class="col-9">
-                                    {{ feature.name }}
-                                    </span> 
-                                    <span class="col-3">${{ feature.price }}</span>
-                                </div> </label>
-                            </div>
-                        </div>
+                   <section class="container d-lg-flex mt-5 " style="gap:150px">
+                        
 
                         <div>
                             <div class="ratings--reviews bg-white ">
@@ -425,6 +427,7 @@ export default {
                 this.product = res.data.product
                 this.rating = res.data
                 this.dataObj = res.data.product
+                this.dataObj2 = res.data.product
                 this.reviews = res.data.product.reviews;
                 this.plansObj = res.data.product.plans
                 // this.getProduct()

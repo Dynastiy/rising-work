@@ -149,7 +149,7 @@
                                 <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
                             </div>
                         <div>
-                            <Gallery :dataObj="dataObj"/>
+                            <GalleryMobile :dataObj2="dataObj2"/>
                         </div>
                        <div class="">
                             <div class="item--details"> 
@@ -291,10 +291,11 @@
 <script>
 import { nairaFilter, percentFilter, percentageFilter, timeStamp } from '@/plugins/filters.js'
 import Gallery from '@/components/galleryView.vue'
+import GalleryMobile from '@/components/galleryViewMobile.vue'
 // import Plans from '@/components/plansView.vue'
 export default {
     components:{
-        Gallery
+        Gallery, GalleryMobile
     },
      data(){
         return {
@@ -303,6 +304,7 @@ export default {
             product: {},
             slug: this.$route.params.slug,
             item_id: '',
+            dataObj2: {},
             dataObj: {},
             plansObj: [],
             comment: '',
@@ -408,6 +410,7 @@ export default {
                 this.product = res.data.product
                 this.rating = res.data
                 this.dataObj = res.data.product
+                this.dataObj2 = res.data.product
                 this.reviews = res.data.product.reviews;
                 this.plansObj = res.data.product.plans
                 // this.getProduct()
