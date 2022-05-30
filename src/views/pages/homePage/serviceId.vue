@@ -10,7 +10,7 @@
 
         <!-- View By Id, Web View  -->
         <div class="container mt-4 web--view">
-            Web
+            
             <div class="single_product">
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
