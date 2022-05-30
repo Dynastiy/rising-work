@@ -190,6 +190,9 @@ export default {
         }
     },
     methods:{
+        viewProduct(slug){ 
+            this.$router.push({ name: 'product-detail', params: { slug } })
+        },
         selectPlan(plan){
             this.isActive = ( this.isActive === plan.id ) ? null : plan.id;
             this.addItem = true;
