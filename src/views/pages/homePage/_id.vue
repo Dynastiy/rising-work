@@ -40,15 +40,6 @@
                                        <h5>Plan Details</h5>
                                    </div>
                                 </div>
-                                <div>
-                                    <label  for="" class="m-0 text-dark">Select Additional Features</label>
-                                    <div class="d-flex align-items-center mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
-                                        <input type="checkbox" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
-                                        <label :for="feature.id" class="m-0 text-capitalize d-flex " style="gap:30px"> <span>
-                                            {{ feature.name }}
-                                        </span> <span>${{ feature.price }}</span> </label>
-                                    </div>
-                                </div>
                             </div>
                             <div class="description mt-4">
                                 
@@ -58,7 +49,7 @@
 
                             <div class="d-flex align-items-center mt-4" style="gap:30px">
                                 <div>
-                                    <h1 style="color: var(--primary-color)">${{ product.price }} </h1>
+                                    <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
                                 </div>
                                 <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
@@ -72,53 +63,71 @@
                             </div>
                             </div>
                         </div>
-                        
                     </div>
 
-                    <section class="ratings--reviews bg-white py-4">
-                                <div class="ratings ">
-                                    <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
-                                </div>
+                    <hr>
+                   <section class="body-content container d-lg-flex mt-5 " style="gap:150px">
+                        <div class="">
+                            <h4 class="m-0 text-dark mb-3">Select Additional Features</h4>
+                            <div class="row align-items-center mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
+                                <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                                <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
+                                <div class="row">
+                                    <span class="col-9">
+                                    {{ feature.name }}
+                                    </span> 
+                                    <span class="col-3">${{ feature.price }}</span>
+                                </div> </label>
+                            </div>
+                        </div>
 
-                                <div class="mt-3">
+                        <div>
+                            <div class="ratings--reviews bg-white ">
+                                    <!-- <div class="ratings ">
+                                        <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
+                                    </div> -->
+
                                     <div class="">
-                                        <h4> Reviews</h4>
-                                    </div>
-                                    <div v-if="posting">
-                                        <p class="text-danger">Posting...</p>
-                                    </div>
-                                    <div  v-if="reviews.length === 0 " class="mt-3">
-                                        <span  class="cancelled">No Reviews for this product yet</span>
-                                    </div>
-                                    <div v-else >
-                                        <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
-                                            <div>
-                                                <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
-                                                    {{ review.reviewer_name.charAt(0) }}
-                                                </span>
-                                            </div>
-                                            <div class="">
-                                                <h5> {{ review.reviewer_name }} </h5>
-                                                <p class="small"> {{ review.comment }} </p>
-                                                <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
+                                        <div class="">
+                                            <h5> Reviews <span class="small"> ({{ reviews.length }} Reviews) </span> </h5>
+                                        </div>
+                                        <div v-if="posting">
+                                            <p class="text-danger">Posting...</p>
+                                        </div>
+                                        <div  v-if="reviews.length === 0 " class="mt-3">
+                                            <span  class="cancelled">No Reviews for this product yet</span>
+                                        </div>
+                                        <div v-else >
+                                            <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
+                                                <div>
+                                                    <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
+                                                        {{ review.reviewer_name.charAt(0) }}
+                                                    </span>
+                                                </div>
+                                                <div class="">
+                                                    <h5> {{ review.reviewer_name }} </h5>
+                                                    <p class="small"> {{ review.comment }} </p>
+                                                    <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- Add Review  -->
+                                        <!-- <div class="mt-4" v-show="loggedIn">
+                                            
+                                            <form action="" @submit.prevent="addReview">
+                                                <div class="add--review">
+                                                    <input type="text" v-model="comment" placeholder="Enter a Review">
+                                                    <button type="submit" style="background-color: transparent; border:none">
+                                                        <IconComponent icon="akar-icons:send" style="font-size:30px"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            
+                                        </div> -->
                                     </div>
-                                    <!-- Add Review  -->
-                                    <!-- <div class="mt-4" v-show="loggedIn">
-                                        
-                                        <form action="" @submit.prevent="addReview">
-                                            <div class="add--review">
-                                                <input type="text" v-model="comment" placeholder="Enter a Review">
-                                                <button type="submit" style="background-color: transparent; border:none">
-                                                    <IconComponent icon="akar-icons:send" style="font-size:30px"/>
-                                                </button>
-                                            </div>
-                                        </form>
-                                        
-                                    </div> -->
-                                </div>
-                            </section>
+                            </div>
+                        </div>
+                   </section>
                 </section>
             </div>
         </div>
@@ -199,6 +208,9 @@ export default {
                 console.log(error);
             }
         },
+        viewProduct(slug){ 
+            this.$router.push({ name: 'product-detail', params: { slug } })
+        },
         addPrice(){
             console.log(this.cartItem);
                 let totalPrice = this.cartItem.reduce((accumulator, item) => {
@@ -258,24 +270,7 @@ export default {
             }
         },
         async getProductId(){
-            let id = this.$route.query.id
-            if (id !== '') {
-                try {
-                let res = await this.$http.get(`/show-product/${id}`)
-                this.item_id = res.data.product
-                console.log(this.item_id);
-                this.product = res.data.product
-                this.rating = res.data
-                this.dataObj = res.data.product
-                this.reviews = res.data.product.reviews;
-                this.plansObj = res.data.product.plans
-                // this.getProduct()
-            } catch (error) {
-                console.log(error);
-            }
-            }
-            else{
-                try {
+            try {
                 let res = await this.$http.get(`/show-product/${this.slug}`)
                 this.item_id = res.data.product
                 console.log(this.item_id);
@@ -287,7 +282,6 @@ export default {
                 // this.getProduct()
             } catch (error) {
                 console.log(error);
-            }
             }
         },
        
