@@ -7,7 +7,10 @@
                <span class="text-capitalize"> {{ product.name }} </span>
            </div>
         </div>
-        <div class="container mt-4">
+
+        <!-- View By Id, Web View  -->
+        <div class="container mt-4 web--view">
+            Web
             <div class="single_product">
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
@@ -49,7 +52,7 @@
 
                             <div class="d-flex align-items-center mt-4" style="gap:30px">
                                 <div>
-                                    <h1 style="color: var(--primary-color)">${{ product.price }} </h1>
+                                    <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
                                 </div>
                                 <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
@@ -80,6 +83,134 @@
                                 </div> </label>
                             </div>
                         </div>
+
+                        <div>
+                            <div class="ratings--reviews bg-white ">
+                                    <!-- <div class="ratings ">
+                                        <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
+                                    </div> -->
+
+                                    <div class="">
+                                        <div class="">
+                                            <h5> Reviews <span class="small"> ({{ reviews.length }} Reviews) </span> </h5>
+                                        </div>
+                                        <div v-if="posting">
+                                            <p class="text-danger">Posting...</p>
+                                        </div>
+                                        <div  v-if="reviews.length === 0 " class="mt-3">
+                                            <span  class="cancelled">No Reviews for this product yet</span>
+                                        </div>
+                                        <div v-else >
+                                            <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
+                                                <div>
+                                                    <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
+                                                        {{ review.reviewer_name.charAt(0) }}
+                                                    </span>
+                                                </div>
+                                                <div class="">
+                                                    <h5> {{ review.reviewer_name }} </h5>
+                                                    <p class="small"> {{ review.comment }} </p>
+                                                    <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Add Review  -->
+                                        <!-- <div class="mt-4" v-show="loggedIn">
+                                            
+                                            <form action="" @submit.prevent="addReview">
+                                                <div class="add--review">
+                                                    <input type="text" v-model="comment" placeholder="Enter a Review">
+                                                    <button type="submit" style="background-color: transparent; border:none">
+                                                        <IconComponent icon="akar-icons:send" style="font-size:30px"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            
+                                        </div> -->
+                                    </div>
+                            </div>
+                        </div>
+                   </section>
+                </section>
+            </div>
+        </div>
+        
+        <!-- View By Id, Mobile View  -->
+        <div class="container mt-4 mobile--view">
+            <div class="single_product">
+                <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
+                <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
+                <section>
+                    <div class="">
+                         <div class="mb-3">
+                                <h4 class="font-weight-bold text-capitalize">
+                                    {{ product.name }}
+                                </h4>
+                                <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
+                            </div>
+                        <div>
+                            <Gallery :dataObj="dataObj"/>
+                        </div>
+                       <div class="">
+                            <div class="item--details"> 
+                                <div class="mt-3 plan--div shadow-sm rounded-lg">
+                                    <div class="select--plan mb-3">
+                                        <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
+                                        <hr class="">
+                                    <div class="d-flex align-items-center">
+                                        <div class="plan--selector2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                                <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
+                                            </div>
+                                    </div>
+                                    <hr class="">
+
+                                    <div>
+                                        <h5>Plan Details</h5>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <h5 class="m-0 text-dark mb-3">Select Additional Features</h5>
+
+                                    <div class="row align-items-center additional-items mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
+                                        <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                                        <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
+                                        <div class="">
+                                            <h4 class="">
+                                            {{ feature.name }}
+                                            </h4> 
+                                            <p class="text-secondary small mt-1">
+                                                {{ feature.name }}
+                                            </p>
+                                            <h3 class="mt-1">+${{ feature.price }}</h3>
+                                        </div> </label>
+                                    </div>
+                                    <div class="description mt-4">
+                                <h4 class="text-uppercase text-dark font-weight-bold"> about {{ product.name }} </h4>
+                                <p class="small text-capitalize"> {{ product.description }} </p>
+                            </div>
+                        </div>
+                            <div class="d-flex align-items-center mt-4" style="gap:30px">
+                                <div>
+                                    <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
+                                </div>
+                                <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
+                                    <span class="material-icons" style="font-size:14px">
+                                        shopping_cart
+                                    </span>
+                                   <span>
+                                        Add to Cart
+                                   </span>
+                                   
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                   <section class="container d-lg-flex mt-5 " style="gap:150px">
+                        
 
                         <div>
                             <div class="ratings--reviews bg-white ">
