@@ -25,12 +25,19 @@
                                 <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
                             </div>
                             <div class="mt-3">
+                                
                                 <div class="select--plan mb-3">
                                     <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
-                                   <div class="d-lg-flex" style="gap:20px">
-                                       <div class="plan--selector mb-2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                    <hr class="">
+                                   <div class="d-lg-flex align-items-center" style="gap:20px">
+                                       <div class="plan--selector" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
                                             <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
                                         </div>
+                                   </div>
+                                   <hr class="">
+
+                                   <div>
+                                       <h5>Plan Details</h5>
                                    </div>
                                 </div>
                                 <div>
@@ -251,7 +258,24 @@ export default {
             }
         },
         async getProductId(){
-            try {
+            let id = this.$route.query.id
+            if (id !== '') {
+                try {
+                let res = await this.$http.get(`/show-product/${id}`)
+                this.item_id = res.data.product
+                console.log(this.item_id);
+                this.product = res.data.product
+                this.rating = res.data
+                this.dataObj = res.data.product
+                this.reviews = res.data.product.reviews;
+                this.plansObj = res.data.product.plans
+                // this.getProduct()
+            } catch (error) {
+                console.log(error);
+            }
+            }
+            else{
+                try {
                 let res = await this.$http.get(`/show-product/${this.slug}`)
                 this.item_id = res.data.product
                 console.log(this.item_id);
@@ -263,6 +287,7 @@ export default {
                 // this.getProduct()
             } catch (error) {
                 console.log(error);
+            }
             }
         },
        

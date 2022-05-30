@@ -36,7 +36,7 @@
                             </div>
                             <div>
                                 <button class="main--button" v-show="value === 'update' ">Update</button>
-                                <button class="main--button" v-show="value === 'add' " @click ="createRequirement()">Create</button>
+                                <button class="main--button" v-show="value === 'add' " @click ="createRequirement(requirement)">Create</button>
                             </div>
                         </form>
                     </div>
@@ -128,19 +128,25 @@ export default {
             let formData = new FormData();
             formData.append('business_name', this.payload.business_name);
             formData.append('business_description', this.payload.business_description)
-            // formData.append('sample_photo_one', this.payload.sample_photo_one)
-            // formData.append('sample_photo_two', this.payload.sample_photo_two)
-            // formData.append('sample_photo_three', this.payload.sample_photo_three)
-            // formData.append('sample_photo_four', this.payload.sample_photo_four)
-            this.$axios.post(`/update-requirement/${this.id}`, formData)
+            formData.append('sample_photo_one', this.payload.sample_photo_one)
+            formData.append('sample_photo_two', this.payload.sample_photo_two)
+            formData.append('sample_photo_three', this.payload.sample_photo_three)
+            formData.append('sample_photo_four', this.payload.sample_photo_four)
+            this.$axios.post(`/update-requirement/${this.requirementsData.id}`, formData)
             .then((res)=>{
                 console.log(res);
+                this.requirement = !this.requirement;
             })
             .catch((res)=>{
                 console.log(res);
             })
-            console.log(this.id);
+            .finaly(()=>{
+                this.$emit('reload');
+            })
         }
+    },
+    mounted() {
+        this.payload = this.requirementsData;
     }
 }
 </script>

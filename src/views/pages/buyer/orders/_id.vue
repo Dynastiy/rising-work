@@ -36,7 +36,7 @@
                     <h4 class="font-weight-bold text-dark"> {{ data_link }} </h4>
                     <Overview :overviewData="overviewData" v-show="data_link == 'Overview' "/>
                     <DeliveredFiles :deliveredFiles="deliveredFiles" v-show="data_link == 'Delivered Files' "/>
-                    <Requirements :requirementsData="requirementsItem" v-show="data_link == 'Requirements' "/>
+                    <Requirements @reload="getOrder()" :requirementsData="requirementsItem" v-show="data_link == 'Requirements' "/>
                     <Messages :chats="chats" @reload="getOrder()" v-show="data_link == 'Messages' "/>
             </div>
       </section>
