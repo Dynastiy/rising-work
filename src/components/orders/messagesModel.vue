@@ -9,7 +9,7 @@
                 </div>
                 <div class="chat--area">
                     <div class="chat--screen">
-                        <div class="message--content" v-for="chat in chats" :key="chat.id">
+                        <div class="message--content" :class="{'active': loggedInuser !== chat.user_id }" v-for="chat in chats" :key="chat.id">
                             <p>{{ chat.message }}</p>
                             <small class="text-muted" style="font-size: 0.7rem"> {{ timeStamp(chat.created_at) }} </small>
                         </div>
@@ -56,6 +56,9 @@ export default {
     refreshMessages(){
         this.$emit('reload');
     }
+    },
+    beforeMount(){
+        this.loggedInuser = this.$store.getters.getUser.id;
     }
 }
 </script>

@@ -919,3 +919,7 @@ body.active {
 .message--content p {
     word-break: normal;
 }
+
+.message--content.active {
+    background-color: #00c0a33d;
+}
