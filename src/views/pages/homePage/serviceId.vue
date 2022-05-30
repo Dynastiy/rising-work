@@ -261,7 +261,7 @@ export default {
             let id = this.$route.query.id
             if (id !== '') {
                 try {
-                let res = await this.$http.get(`/show-product/${id}`)
+                let res = await this.$http.get(`/find-product/${id}`)
                 this.item_id = res.data.product
                 console.log(this.item_id);
                 this.product = res.data.product
