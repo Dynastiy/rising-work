@@ -6,7 +6,7 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <h1 class="mb-4" data-aos="fade-up-right">World Class <span style="color:var(--secondary-color)">design</span> at your service.</h1>
-              <p class="text-secondary">
+              <p class="text-white">
                 We make it easy to work with professional, creative experts from
                 around the world and build your brand through custom, memorable
                 design.
@@ -17,8 +17,8 @@
               </div>
             </div>
 
-            <div class="col-md-6 text-right" data-aos="fade-down-left">
-              <img src="@/assets/img/hero-image.svg" alt="">
+            <div class="col-md-6 text-right animated-content animate__animated animate__pulse animate__slow animate__infinite	infinite" data-aos="fade-down-left">
+              <img src="@/assets/img/mockup.png" class="rounded-lg" width="100%" alt="">
             </div>
           </div>
         </div>
@@ -35,8 +35,8 @@
       <div class="featured--products mb-4 container">
         <div class="mt-4">
           <h1 class="mb-4"><span style="color: var(--secondary-color)">Trending</span> Services</h1>
-          <div class="content">
-            <div v-for="product in products.data" :key="product.id">
+          <div class="">
+            <!-- <div v-for="product in products.data" :key="product.id">
                 <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
                     <div>
                         <hr class="bg-white w-50" style="height:2px">
@@ -44,7 +44,21 @@
                         <h5>Start at ${{product.price}}</h5>
                     </div>
                 </div>
+            </div> -->
+          <section class="cards content">
+          <article class="card card--1" v-for="product in products.data" :key="product.id">
+            <div class="card__img" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)"></div>
+            <a href="javascript:void(0)" class="card_link" role="button" @click="viewProduct(product.slug)">
+              <div class="card__img--hover"  :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"></div>
+            </a>
+            <div class="card__info" role="button" @click="viewProduct(product.slug)">
+              <span class="card__category" v-if="product.price !== 'null' "> Start at ${{product.price}}</span>
+              <span class="card__category" v-else> not specified </span>
+              <h3 class="card__title text-white text-capitalize"> {{ product.name }} </h3>
+              <!-- <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span> -->
             </div>
+          </article>
+        </section>
             </div>
           <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
           arrow_forward
@@ -68,17 +82,24 @@
       <div class="featured--products mb-4 container">
         <div class="mt-4">
           <h1 class="mb-4"><span style="color: var(--secondary-color)">Top Rated</span> Professional Services</h1>
-          <div class="content">
-            <div v-for="product in top_rated_products" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"
-            :key="product.key" class="creative--services creative--services1" data-aos="fade-up-right"
-            role="button" @click="viewProduct(product.slug)">
-              <div>
-               <h3 class="text-capitalize"> {{ product.name }} </h3>
-                <h5>Start at ${{product.price}}</h5>
-              </div>
+          <div class="">
+          <section class="cards content">
+          <article class="card card--1" v-for="product in top_rated_products" :key="product.id">
+            <div class="card__img" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)"></div>
+            <a href="javascript:void(0)" class="card_link" role="button" @click="viewProduct(product.slug)">
+              <div class="card__img--hover"  :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"></div>
+            </a>
+            <div class="card__info" role="button" @click="viewProduct(product.slug)">
+              <span class="card__category" v-if="product.price !== 'null' "> Start at ${{product.price}}</span>
+              <span class="card__category" v-else> not specified </span>
+              <h3 class="card__title text-white text-capitalize"> {{ product.name }} </h3>
+              <span class="card__by card__author d-flex justify-content-between"> 
+                <span> <b class="text-white">Rating</b> {{ product.avg_ratings }} <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> 
+                <span> {{ product.delivery_time }} Days <span class="text-white">Delivery</span> </span> </span>
             </div>
-
-          </div>
+          </article>
+        </section>
+            </div>
           <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
           arrow_forward
           </span></router-link>
@@ -101,6 +122,7 @@
 </template>
 
 <script>
+import 'animate.css';
 import slider from '@/components/static/sponsorSlider.vue'
 export default {
     components:{
@@ -143,3 +165,11 @@ export default {
     
 }
 </script>
+
+<style>
+.animated-content{
+
+  --animate-duration: 10s;
+
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="bg-white p-2 shadow-sm">
              <div class="image--views">
                 <section class="gallery">
                     <div class="gallery__item">

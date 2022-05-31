@@ -3,17 +3,17 @@
     <div class="app--header">
       <div class="container menu ">
         <div class="">
-          <router-link to="/"> <img src="@/assets/img/logo.svg" width="150" alt="" srcset=""> </router-link>
+          <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
         </div>
-        <div class="other--menu">
-          <router-link class="" to="/categories">Categories</router-link>
+        <div class="other--menu ml-auto">
+          <router-link class="" to="/categories">Services</router-link>
           <router-link class="" to="/">How it Works</router-link>
         </div>
-        <div class="user--area ml-auto d-flex" style="gap:20px" v-if="!loggedIn">
+        <div class="user--area  d-flex" style="gap:20px" v-if="!loggedIn">
             <button class="btn--main" @click="goToLogin">Login</button>
             <button class="btn--main" @click="goToRegister">Register</button>
         </div>
-        <div class="ml-auto" v-else>
+        <div class="" v-else>
           <!-- <div class="cart">
             <span class="material-icons text-white">
               shopping_bag
@@ -44,7 +44,7 @@
           <router-link to="/"> <img src="@/assets/img/logo.svg" width="150" alt="" srcset=""> </router-link>
         </div>
           <div >
-            <span class="material-icons text-dark" id="tog" style="font-size:30px"  role="button">
+            <span class="material-icons text-white" id="tog" style="font-size:30px"  role="button">
               menu
             </span>
           </div>
@@ -81,10 +81,10 @@
       <!-- Logout Confirmation Box -->
       <Logout v-show="logout_confirmation" @close="closeConfirmBox"/>
     </div>
-
+<!-- 
     <div>
           <hr class="m-0" style="background-color:#fff">
-        </div>
+        </div> -->
   </div>
 </template>
 

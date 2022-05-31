@@ -1,10 +1,10 @@
 <template>
-    <div class="pb-3">
-        <div class=" shadow-lg py-3">
+    <div class="pb-3" style="background-color: var(--gray-100)">
+        <div class=" shadow-sm bg-white py-3">
            <div class="container">
                <span> Home </span>
                <span> <IconComponent icon="uit:angle-double-right"/> </span>
-               <span class="text-capitalize"> {{ product.name }} </span>
+               <span class="text-capitalize text-muted"> {{ product.name }} </span>
            </div>
         </div>
 
@@ -16,31 +16,38 @@
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
                     <div class="body--content">
+                        
                         <div>
+                            <div class=" mb-3">
+                                <h3 class="font-weight-bold text-capitalize">
+                                    {{ product.name }}
+                                </h3>
+                                <!-- <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p> -->
+                                <p class="text-secondary" v-if="product.reviews"> <span> <b>Rating</b> <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> <span> {{ product.reviews.length }} Reviews </span></p>
+                            </div>
                             <Gallery :dataObj="dataObj"/>
                         </div>
                        <div class="">
                             <div class="item--details">
-                                <div class="">
-                                <h1 class="font-weight-bold text-uppercase">
-                                    {{ product.name }}
-                                </h1>
-                                <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
-                            </div>
-                            <div class="mt-3">
+
+                            <div class="bg-white">
                                 
-                                <div class="select--plan mb-3">
-                                    <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
-                                    <hr class="">
-                                   <div class="d-lg-flex align-items-center" style="gap:20px">
-                                       <div class="plan--selector" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                            <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
+                                <div class="select--plan shadow-sm mb-3">
+                                    <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
+                                   <div class="d-lg-flex align-items-center">
+                                       <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                            <div role="button"  class="text-center nav--item w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
+                                                <span class="m-0" style="font-size: 18px">${{ plan.price}}</span>  
+                                                <span> {{ plan.name }} </span> 
+                                            </div>
                                         </div>
                                    </div>
-                                   <hr class="">
 
-                                   <div>
-                                       <h5>Plan Details</h5>
+                                   <div class="p-3">
+                                       <div class="d-flex align-items-center justify-content-between">
+                                           <span> {{ plan.name }} </span>
+                                           <span> ${{ plan.price }} </span>
+                                       </div>
                                    </div>
                                 </div>
                             </div>
@@ -69,18 +76,26 @@
                     </div>
 
                     <hr>
-                   <section class="body-content container d-lg-flex mt-5 " style="gap:150px">
-                        <div class="">
-                            <h4 class="m-0 text-dark mb-3">Select Additional Features</h4>
-                            <div class="row align-items-center mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
-                                <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                   <section class="body-content features container mt-5 " >
+                        <div class="mb-4">
+                            <h4 class="m-0 text-dark mb-3">Additional Features</h4>
+                            <div class="bg-white shadow-sm p-4">
+                                <div class="row additional-items mb-2" role="button" v-for="feature in product.features" :key="feature.id">
+                                <input type="checkbox" class="col select-feature" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
                                 <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
-                                <div class="row">
-                                    <span class="col-9">
-                                    {{ feature.name }}
-                                    </span> 
-                                    <span class="col-3">${{ feature.price }}</span>
-                                </div> </label>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <h5 >
+                                            {{ feature.name }}
+                                            </h5> 
+                                            <h6 class="text-secondary">
+                                                {{ feature.name }}
+                                            </h6>
+                                        </div>
+                                        <h2 class="col-3">+${{ feature.price }}</h2>
+                                    </div> 
+                                </label>
+                            </div>
                             </div>
                         </div>
 
@@ -289,13 +304,14 @@
 </template>
 
 <script>
+
 import { nairaFilter, percentFilter, percentageFilter, timeStamp } from '@/plugins/filters.js'
 import Gallery from '@/components/galleryView.vue'
 import GalleryMobile from '@/components/galleryViewMobile.vue'
 // import Plans from '@/components/plansView.vue'
 export default {
     components:{
-        Gallery, GalleryMobile
+        Gallery, GalleryMobile,
     },
      data(){
         return {
@@ -320,6 +336,7 @@ export default {
             total_amount:'',
             products: [],
             url: 'https://api.risingwork.com/',
+            plan: {}
         }
     },
     methods:{
@@ -327,10 +344,18 @@ export default {
             this.isActive = ( this.isActive === plan.id ) ? null : plan.id;
             this.addItem = true;
             console.log(plan);
+            this.findPlan(plan.id);
             this.plan_id = plan.id
             this.selected_plan = plan.price;
             console.log(this.selected_plan);
             this.addPrice()
+        },
+        findPlan(plan){
+            this.$axios.get(`/find-plan/${plan}`)
+            .then((res)=>{
+                console.log(res);
+                this.plan = res.data.plan
+            })
         },
         async getTrending(){
             try {

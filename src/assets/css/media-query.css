@@ -79,7 +79,10 @@
             grid-template-columns: auto;
             grid-gap: 20px;
         }
-        .featured--products .content {
+        .featured--products .content{
+            grid-template-columns: 1fr 1fr;
+        }
+        .cards {
             grid-template-columns: 1fr 1fr;
         }
         .create-post-content {
