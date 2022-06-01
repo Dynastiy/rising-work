@@ -16,7 +16,6 @@
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
                     <div class="body--content">
-                        
                         <div>
                             <div class=" mb-3">
                                 <h3 class="font-weight-bold text-capitalize">

@@ -41,7 +41,7 @@
       <div class="mobile--menu px-4">
         <div class="d-flex align-items-center justify-content-between">
           <div class="">
-          <router-link to="/"> <img src="@/assets/img/logo.svg" width="150" alt="" srcset=""> </router-link>
+          <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
         </div>
           <div >
             <span class="material-icons text-white" id="tog" style="font-size:30px"  role="button">
