@@ -93,9 +93,9 @@
               <span class="card__category" v-if="product.price !== 'null' "> Start at ${{product.price}}</span>
               <span class="card__category" v-else> not specified </span>
               <h5 class="card__title text-white text-capitalize"> {{ product.name }} </h5>
-              <span class="card__by card__author d-flex justify-content-between"> 
-                <span> <b class="text-white">Rating</b> {{ product.avg_ratings }} <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> 
-                <span> {{ product.delivery_time }} Days <span class="text-white">Delivery</span> </span> </span>
+              <span class="card__by card__author d-lg-flex justify-content-between "> 
+                <span class="d-block"> <b class="text-white">Rating</b> {{ product.avg_ratings }} <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> 
+                <span class="d-block"> {{ product.delivery_time }} Days <span class="text-white">Delivery</span> </span> </span>
             </div>
           </article>
         </section>
