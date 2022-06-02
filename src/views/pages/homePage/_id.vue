@@ -18,29 +18,29 @@
                     <div class="container body--content">
                         <div>
                             <div class=" mb-3">
-                                <h3 class="font-weight-bold text-capitalize">
+                                <h4 class="font-weight-bold text-capitalize">
                                     {{ product.name }}
-                                </h3>
+                                </h4>
                                 <!-- <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p> -->
                                 <p class="text-secondary" v-if="product.reviews"> <span> <b>Rating</b> <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> <span> {{ product.reviews.length }} Reviews </span></p>
                             </div>
                             <Gallery :dataObj="dataObj"/>
                         </div>
-                       <div class="sticky-top">
-                            <div class="item--details">
+                       <div class="">
+                            <div class="item--details content" id="plans">
 
-                            <div class="bg-white ">
+                            <div class="bg-white content" >
                                 
-                                <div class="select--plan shadow-sm mb-3 d-flex flex-column justify-content-between" style="min-height:400px" v-if="plan">
+                                <div class="select--plan shadow-sm mb-3 d-flex flex-column justify-content-between" style="min-height:500px" v-if="plan">
                                     <div >
                                         <div>
-                                        <h4 class="text-uppercase text-secondary text-center py-4"> {{ plan.name }} </h4>
+                                        <h5 class="text-uppercase text-dark text-center py-3"> {{ plan.name }} </h5>
                                     </div>
                                     <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
                                    <div class="d-flex align-items-center">
                                        <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
                                             <div role="button"  class="text-center py-2 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
-                                                <span class="m-0"  style="font-size: 20px">${{ plan.price}}</span>  
+                                                <span class="m-0"  style="font-size: 15px">${{ plan.price}}</span>  
                                                 <!-- <span> {{ plan.name }} </span>  -->
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                                     <h3 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h3>
                                 </div>
                                 <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
-                                    <span class="material-icons" style="font-size:14px">
+                                    <span class="material-icons" style="font-size:12px">
                                         shopping_cart
                                     </span>
                                    <span>
@@ -83,15 +83,10 @@
                         </div>
                     </div>
 
-                    <div class="container">
-                         <div class="description mt-4">
-                                <p class="text-capitalize"> {{ product.description }} </p>
-                            </div>
-                    </div>
-
                     <hr>
-                   <section class="container features mt-5 " >
-                        <div class="mb-4">
+                   <section class="container features mt-5" style="" id="featured">
+                        <div>
+                            <div class="mb-4">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>
                             <div class="bg-white shadow-sm p-4">
                                 <div class="row additional-items mb-2" role="button" v-for="feature in product.features" :key="feature.id">
@@ -113,8 +108,14 @@
                             </div>
                         </div>
 
+                        <hr>
+                        <div class="description my-4">
+                                <!-- <p class="text-capitalize"> {{ product.description }} </p> -->
+                                 <div v-html="product.description"></div>
+                        </div>
+
                         <div>
-                            <div class="ratings--reviews bg-white p-3 shadow-sm ">
+                            <div class="ratings--reviews bg-white p-3 shadow-sm " >
                                     <!-- <div class="ratings ">
                                         <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
                                     </div> -->
@@ -159,14 +160,17 @@
                                     </div>
                             </div>
                         </div>
+                        </div>
                    </section>
+
+                   
                 </section>
             </div>
         </div>
         
        
 
-        <div class="container">
+        <div class="container" >
             <!-- Feature Products  -->
             <div class="featured--products mb-4">
                 <div class="mt-4">
@@ -195,7 +199,6 @@
 </template>
 
 <script>
-
 import { nairaFilter, percentFilter, percentageFilter, timeStamp } from '@/plugins/filters.js'
 import Gallery from '@/components/galleryView.vue'
 // import GalleryMobile from '@/components/galleryViewMobile.vue'
@@ -360,6 +363,23 @@ export default {
     mounted(){
             this.getProductId()
             this.getTrending()
+            window.onscroll = function() {myFunction()};
+            var navbar = document.getElementById("plans")
+            var featuredItems = document.getElementById('featured')
+            // var sticky = navbar.offsetTop;
+            var sticky2 = featuredItems.offsetTop;
+            function myFunction() {
+                if (window.pageYOffset < sticky2) {
+                navbar.classList.add("sticky")
+                }
+                
+                // else if(window.pageYOffset >= sticky2) {
+                //     navbar.classList.remove("sticky")
+                // }
+                else {
+                navbar.classList.remove("sticky");
+                }
+            }
     },
     computed:{
       loggedIn(){
@@ -370,5 +390,11 @@ export default {
 </script>
 
 <style>
-    
+    .sticky {
+  position: fixed;
+  top: 0;
+  width: 30%;
+  z-index: 999;
+  padding-top: 160px ;
+}
 </style>

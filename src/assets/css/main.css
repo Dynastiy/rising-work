@@ -1,7 +1,14 @@
 @import url('@/assets/css/partials.css');
 body {
     /* background-color: var(--accent-color); */
+    min-height: 400px;
+   /* margin-bottom: 400px; */
+   clear: both;
 }
+body > footer {
+    position: sticky;
+    top: 100vh;
+  }
 
 body.active {
     background-color: rgba(0, 0, 0, 0.7);
@@ -484,7 +491,7 @@ body.active {
 }
 .body--content{
     display: grid;
-    grid-template-columns: 0.6fr 0.4fr;
+    grid-template-columns: 60% 40%;
     gap: 50px;
     /* background-color: #fff; */
     padding: 1rem;
@@ -581,7 +588,7 @@ body.active {
 
 .footer {
     background: var(--main-color);
-    height: 100%;
+    /* height: 400px; */
     width: 100%;
     background-size: cover;
     background-position: bottom;
@@ -1137,4 +1144,11 @@ border-bottom-right-radius: 12px;
 .trending{
     display: flex;
     gap: 10px;
+}
+ol li {
+    margin-left: 2rem;
+}
+.features {
+    display: grid;
+    grid-template-columns: 60% 40%;
 }

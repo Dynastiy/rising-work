@@ -178,4 +178,12 @@
         .trending--products a {
             line-height: 10px !important;
         }
+        .sticky {
+            position: unset !important;
+            padding-top: 0.5rem !important;
+          }
+          .features {
+            display: grid;
+            grid-template-columns: auto;
+        }
 }
