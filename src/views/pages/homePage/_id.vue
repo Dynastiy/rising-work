@@ -15,7 +15,7 @@
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
-                    <div class="body--content">
+                    <div class="container body--content">
                         <div>
                             <div class=" mb-3">
                                 <h3 class="font-weight-bold text-capitalize">
@@ -39,7 +39,7 @@
                                     <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
                                    <div class="d-flex align-items-center">
                                        <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                            <div role="button"  class="text-center py-3 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
+                                            <div role="button"  class="text-center py-2 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
                                                 <span class="m-0"  style="font-size: 20px">${{ plan.price}}</span>  
                                                 <!-- <span> {{ plan.name }} </span>  -->
                                             </div>

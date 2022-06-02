@@ -19,7 +19,7 @@
                 <div class="trending--products">
                   <h5 class="text-secondary">Trending Services:</h5>
                   <div class="text-white trending" style="gap:15px" v-for="product in products.data" :key="product.id">
-                    <a class="text-secondary m-0" role="button"> {{product.name}}  </a>
+                    <a class="text-secondary m-0" role="button" @click="viewProduct(product.slug)"> {{product.name}}  </a>
                   </div>
                  
                 </div>
