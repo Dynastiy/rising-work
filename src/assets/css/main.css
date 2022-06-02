@@ -56,10 +56,10 @@ body.active {
     border: none;
     background-color: var(--secondary-color);
     color: var(--gray-100);
-    padding: 0.5rem 2rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
     margin: 0.1rem;
-    border-radius: 15px;
+    border-radius:0 14px 14px 0;
 }
 
 .app--header {
@@ -1115,4 +1115,26 @@ border-bottom-right-radius: 12px;
 
 .card:hover .card__info-hover {
     opacity: 1;
+}
+
+
+.trending--products{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    /* justify-content: ; */
+    text-transform: capitalize;
+}
+.trending--products a:hover {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+.trending a {
+    display: block;
+}
+.trending{
+    display: flex;
+    gap: 10px;
 }

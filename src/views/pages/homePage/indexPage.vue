@@ -12,8 +12,17 @@
                 design.
               </p>
               <div class="input--field">
-                <input type="search" name="" id="" />
-                <input type="button" value="Get Started" />
+                <input type="search" name="" id=""  />
+                <input type="button" value="Search" />
+              </div>
+              <div>
+                <div class="trending--products">
+                  <h5 class="text-secondary">Trending Services:</h5>
+                  <div class="text-white trending" style="gap:15px" v-for="product in products.data" :key="product.id">
+                    <a class="text-secondary m-0" role="button"> {{product.name}}  </a>
+                  </div>
+                 
+                </div>
               </div>
             </div>
 
@@ -157,6 +166,7 @@ export default {
         viewProduct(slug){ 
             this.$router.push({ name: 'product-detail', params: { slug } })
         },
+
     },
     mounted(){
       this.getTrending()
@@ -169,7 +179,7 @@ export default {
 <style>
 .animated-content{
 
-  --animate-duration: 8s;
+  --animate-duration: 6s;
 
 }
 </style>

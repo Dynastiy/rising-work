@@ -96,7 +96,7 @@
             z-index: 999;
             background-color: #000;
             top: 0;
-            right: -1000px;
+            left: -1000px;
         }
         .mobile--nav a {
             font-size: 1.2rem;
@@ -108,7 +108,7 @@
             background-color: var(--secondary-color);
         }
         .mobile--nav.active {
-            right: 0;
+            left: 0;
         }
         .menu {
             display: none !important;
@@ -167,5 +167,15 @@
         }
         .web--view {
             display: none;
+        }
+        .trending--products{
+            /* display: grid; */
+            /* flex-wrap: wrap; */
+            /* gap: 20px; */
+            justify-content: center;
+            text-transform: capitalize;
+        }
+        .trending--products a {
+            line-height: 10px !important;
         }
 }

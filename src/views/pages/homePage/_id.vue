@@ -1,6 +1,6 @@
 <template>
     <div class="pb-3" style="background-color: var(--gray-100)">
-        <div class=" shadow-sm bg-white py-3">
+        <div class=" shadow-sm bg-light py-3">
            <div class="container">
                <span> Home </span>
                <span> <IconComponent icon="uit:angle-double-right"/> </span>
@@ -9,7 +9,7 @@
         </div>
 
         <!-- View By Id, Web View  -->
-        <div class="container mt-4 web--view">
+        <div class="mt-4">
             
             <div class="single_product">
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
@@ -26,39 +26,46 @@
                             </div>
                             <Gallery :dataObj="dataObj"/>
                         </div>
-                       <div class="">
+                       <div class="sticky-top">
                             <div class="item--details">
 
-                            <div class="bg-white">
+                            <div class="bg-white ">
                                 
-                                <div class="select--plan shadow-sm mb-3">
+                                <div class="select--plan shadow-sm mb-3 d-flex flex-column justify-content-between" style="min-height:400px" v-if="plan">
+                                    <div >
+                                        <div>
+                                        <h4 class="text-uppercase text-secondary text-center py-4"> {{ plan.name }} </h4>
+                                    </div>
                                     <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
-                                   <div class="d-lg-flex align-items-center">
+                                   <div class="d-flex align-items-center">
                                        <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                            <div role="button"  class="text-center nav--item w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
-                                                <span class="m-0" style="font-size: 18px">${{ plan.price}}</span>  
-                                                <span> {{ plan.name }} </span> 
+                                            <div role="button"  class="text-center py-3 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
+                                                <span class="m-0"  style="font-size: 20px">${{ plan.price}}</span>  
+                                                <!-- <span> {{ plan.name }} </span>  -->
                                             </div>
                                         </div>
                                    </div>
 
                                    <div class="p-3">
-                                       <div class="d-flex align-items-center justify-content-between">
-                                           <span> {{ plan.name }} </span>
-                                           <span> ${{ plan.price }} </span>
+                                       <div class="">
+                                           <span class="" v-if="plan.delivery_time !== 'null' ">
+                                           <span class="material-icons " style="font-size:15px" >
+                                                event_repeat
+                                            </span> {{ plan.delivery_time }} Days Delivery</span> <span v-else>Not Specified</span> 
+                                       </div>
+                                       
+                                       <div class="d-flex align-items-center mt-3" style="gap:10px" v-for="plan_desc in plan.plan_descriptions" :key="plan_desc.id">
+                                           <span class="material-icons text-success" style="font-size:24px" >
+                                                task_alt
+                                            </span>
+                                            <span style="font-size:15px"> {{ plan_desc.name }} </span>
                                        </div>
                                    </div>
-                                </div>
-                            </div>
-                            <div class="description mt-4">
-                                
-                                <h4 class="text-uppercase text-dark font-weight-bold"> about {{ product.name }} </h4>
-                                <p class="small text-capitalize"> {{ product.description }} </p>
-                            </div>
+                                    </div>
 
-                            <div class="d-flex align-items-center mt-4" style="gap:30px">
+                                    <div class="d-flex align-items-center mt-4 bg-light py-3 justify-content-between px-3" style="gap:30px">
                                 <div>
-                                    <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
+                                    <h3 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h3>
                                 </div>
                                 <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
                                     <span class="material-icons" style="font-size:14px">
@@ -70,12 +77,20 @@
                                    
                                 </div>
                             </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="container">
+                         <div class="description mt-4">
+                                <p class="text-capitalize"> {{ product.description }} </p>
+                            </div>
+                    </div>
+
                     <hr>
-                   <section class="body-content features container mt-5 " >
+                   <section class="container features mt-5 " >
                         <div class="mb-4">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>
                             <div class="bg-white shadow-sm p-4">
@@ -99,7 +114,7 @@
                         </div>
 
                         <div>
-                            <div class="ratings--reviews bg-white ">
+                            <div class="ratings--reviews bg-white p-3 shadow-sm ">
                                     <!-- <div class="ratings ">
                                         <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
                                     </div> -->
@@ -149,150 +164,27 @@
             </div>
         </div>
         
-        <!-- View By Id, Mobile View  -->
-        <div class="container mt-4 mobile--view">
-            <div class="single_product">
-                <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
-                <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
-                <section>
-                    <div class="">
-                         <div class="mb-3">
-                                <h4 class="font-weight-bold text-capitalize">
-                                    {{ product.name }}
-                                </h4>
-                                <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p>
-                            </div>
-                        <div>
-                            <GalleryMobile :dataObj2="dataObj2"/>
-                        </div>
-                       <div class="">
-                            <div class="item--details"> 
-                                <div class="mt-3 plan--div shadow-sm rounded-lg">
-                                    <div class="select--plan mb-3">
-                                        <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label>
-                                        <hr class="">
-                                    <div class="d-flex align-items-center">
-                                        <div class="plan--selector2" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                                <button class="nav--item" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">{{ plan.name}}</button>
-                                            </div>
-                                    </div>
-                                    <hr class="">
-
-                                    <div>
-                                        <h5>Plan Details</h5>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <h5 class="m-0 text-dark mb-3">Select Additional Features</h5>
-
-                                    <div class="row align-items-center additional-items mb-2" style="gap:10px" v-for="feature in product.features" :key="feature.id">
-                                        <input type="checkbox" class="col" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
-                                        <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
-                                        <div class="">
-                                            <h4 class="">
-                                            {{ feature.name }}
-                                            </h4> 
-                                            <p class="text-secondary small mt-1">
-                                                {{ feature.name }}
-                                            </p>
-                                            <h3 class="mt-1">+${{ feature.price }}</h3>
-                                        </div> </label>
-                                    </div>
-                                    <div class="description mt-4">
-                                <h4 class="text-uppercase text-dark font-weight-bold"> about {{ product.name }} </h4>
-                                <p class="small text-capitalize"> {{ product.description }} </p>
-                            </div>
-                        </div>
-                            <div class="d-flex align-items-center mt-4" style="gap:30px">
-                                <div>
-                                    <h1 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h1>
-                                </div>
-                                <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
-                                    <span class="material-icons" style="font-size:14px">
-                                        shopping_cart
-                                    </span>
-                                   <span>
-                                        Add to Cart
-                                   </span>
-                                   
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-                   <section class="container d-lg-flex mt-5 " style="gap:150px">
-                        
-
-                        <div>
-                            <div class="ratings--reviews bg-white ">
-                                    <!-- <div class="ratings ">
-                                        <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
-                                    </div> -->
-
-                                    <div class="">
-                                        <div class="">
-                                            <h5> Reviews <span class="small"> ({{ reviews.length }} Reviews) </span> </h5>
-                                        </div>
-                                        <div v-if="posting">
-                                            <p class="text-danger">Posting...</p>
-                                        </div>
-                                        <div  v-if="reviews.length === 0 " class="mt-3">
-                                            <span  class="cancelled">No Reviews for this product yet</span>
-                                        </div>
-                                        <div v-else >
-                                            <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
-                                                <div>
-                                                    <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
-                                                        {{ review.reviewer_name.charAt(0) }}
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <h5> {{ review.reviewer_name }} </h5>
-                                                    <p class="small"> {{ review.comment }} </p>
-                                                    <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Add Review  -->
-                                        <!-- <div class="mt-4" v-show="loggedIn">
-                                            
-                                            <form action="" @submit.prevent="addReview">
-                                                <div class="add--review">
-                                                    <input type="text" v-model="comment" placeholder="Enter a Review">
-                                                    <button type="submit" style="background-color: transparent; border:none">
-                                                        <IconComponent icon="akar-icons:send" style="font-size:30px"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                            
-                                        </div> -->
-                                    </div>
-                            </div>
-                        </div>
-                   </section>
-                </section>
-            </div>
-        </div>
+       
 
         <div class="container">
             <!-- Feature Products  -->
-            <div class="featured--products mb-4 container">
+            <div class="featured--products mb-4">
                 <div class="mt-4">
                 <h2 class="mb-4">Related Services</h2>
-                <div class="content">
-                    <div v-for="product in products.data" :key="product.id">
-                        <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
-                            <div>
-                                <hr class="bg-white w-50" style="height:2px">
-                                <h3 class="text-capitalize"> {{ product.name }} </h3>
-                                <h5>Start at ${{product.price}}</h5>
-                            </div>
+                <section class="cards content">
+                    <article class="card card--1" v-for="product in products.data" :key="product.id">
+                        <div class="card__img" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)"></div>
+                        <a href="javascript:void(0)" class="card_link" role="button" @click="viewProduct(product.slug)">
+                        <div class="card__img--hover"  :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"></div>
+                        </a>
+                        <div class="card__info" role="button" @click="viewProduct(product.slug)">
+                            <span class="card__category" v-if="product.price !== 'null' "> Start at ${{product.price}}</span>
+                            <span class="card__category" v-else> not specified </span>
+                            <h5 class="card__title text-white text-capitalize"> {{ product.name }} </h5>
+                            <!-- <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span> -->
                         </div>
-                    </div>
-                    </div>
+                    </article>
+                </section>
                 <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
                 arrow_forward
                 </span></router-link>
@@ -306,11 +198,12 @@
 
 import { nairaFilter, percentFilter, percentageFilter, timeStamp } from '@/plugins/filters.js'
 import Gallery from '@/components/galleryView.vue'
-import GalleryMobile from '@/components/galleryViewMobile.vue'
+// import GalleryMobile from '@/components/galleryViewMobile.vue'
 // import Plans from '@/components/plansView.vue'
 export default {
     components:{
-        Gallery, GalleryMobile,
+        Gallery, 
+        // GalleryMobile,
     },
      data(){
         return {
@@ -319,7 +212,6 @@ export default {
             product: {},
             slug: this.$route.params.slug,
             item_id: '',
-            dataObj2: {},
             dataObj: {},
             plansObj: [],
             comment: '',
@@ -434,9 +326,13 @@ export default {
                 this.product = res.data.product
                 this.rating = res.data
                 this.dataObj = res.data.product
-                this.dataObj2 = res.data.product
                 this.reviews = res.data.product.reviews;
                 this.plansObj = res.data.product.plans
+                let plan_id = res.data.product.plans[0].id
+                console.log(plan_id);
+                this.plan_id = plan_id
+                this.findPlan(plan_id);
+                this.isActive = ( this.isActive === plan_id ) ? null : plan_id;
                 // this.getProduct()
             } catch (error) {
                 console.log(error);
@@ -474,5 +370,5 @@ export default {
 </script>
 
 <style>
-
+    
 </style>

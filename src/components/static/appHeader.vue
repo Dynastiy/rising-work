@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sticky-top shadow-sm" style="z-index:9999">
     <div class="app--header">
       <div class="container menu ">
         <div class="">
@@ -23,13 +23,13 @@
             </div>
           </div> -->
           
-          <div class="dropdown ">
+          <div class="dropleft ">
             <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
-             <span class="text-dark material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
+             <span class="text-light material-icons" type="button" data-toggle="dropdown" >
               account_circle_full
             </span>
             <!-- </button> -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" >
               <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
               <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
               <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
@@ -40,14 +40,37 @@
 
       <div class="mobile--menu px-4">
         <div class="d-flex align-items-center justify-content-between">
-          <div class="">
-          <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
-        </div>
+          
           <div >
             <span class="material-icons text-white" id="tog" style="font-size:30px"  role="button">
               menu
             </span>
           </div>
+
+        <div class="">
+          <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
+        </div>
+
+          <div class="">
+            <div v-if="!loggedIn"> 
+            <button class="add--button btn btn-light">
+              <router-link to="/sign-in" class="text-dark">Sign In</router-link>
+            </button>
+          </div>
+            <div class="dropleft " v-else>
+            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
+             <span class="d-flex text-light material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
+              account_circle_full
+            </span>
+            <!-- </button> -->
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
+              <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
+              <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
+            </div>
+          </div>
+          </div>
+        
         </div>
       </div>
 
@@ -59,19 +82,16 @@
         </div>
         <ul class="list-unstyled">
           <li>
-            <router-link to="/categories">Categories</router-link>
+            <router-link to="/" class="small"> <span class="material-icons mr-2">home</span> Home </router-link>
           </li>
-          <!-- <li>
-            <router-link to="/">How It Works</router-link>
-          </li> -->
           <li>
-            <router-link to="/dashboard">Dashboard</router-link>
+            <router-link to="/categories" class="small"> <span class="material-icons mr-2">category</span> Categories</router-link>
           </li>
-            <li><a href="javascript:void(0)"><button class="btn--main" @click="goToLogin">Login</button></a></li>
-            <li><a href="javascript:void(0)"><button class="btn--main" @click="goToRegister">Register</button></a></li>
-          <li>
-            <a class="" href="javascript:void(0)" @click="logout">Logout</a>
+          <li v-if="loggedIn">
+            <router-link to="/dashboard" class="small"> <span class="material-icons mr-2">apps</span> Dashboard</router-link>
+            <a class="small" href="javascript:void(0)" @click="logout" > <span class="material-icons mr-2">logout</span> Logout</a>
           </li>
+          
         </ul>
       </div>
 
