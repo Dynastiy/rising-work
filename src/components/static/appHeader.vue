@@ -57,7 +57,12 @@
                 <router-link to="/sign-in" class="text-dark">Sign In</router-link>
               </button>
             </div>
-              <div class="dropleft" v-else>
+            <div v-else>
+              <button class="add--button btn btn-light">
+                <router-link to="/dashboard" class="text-dark">Dashboard</router-link>
+              </button>
+            </div>
+              <!-- <div class="dropleft" v-else>
               <div class="">
                 <span class="text-light  material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
                     account_circle_full
@@ -68,7 +73,7 @@
                 <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
                 <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
               </div>
-            </div>
+            </div> -->
           </div>
         
         </div>
