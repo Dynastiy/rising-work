@@ -186,4 +186,17 @@
             display: grid;
             grid-template-columns: auto;
         }
+        .card-img > img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            height: 300px !important;
+            object-fit: cover;
+        }
+        .thumbnail-image > img {
+            width: 100%;
+            height: 50px !important;
+            transition: all 250ms;
+            object-fit: cover;
+        }
 }

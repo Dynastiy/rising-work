@@ -11,7 +11,7 @@
         </div>
         <div class="user--area  d-flex" style="gap:20px" v-if="!loggedIn">
             <button class="btn--main" @click="goToLogin">Login</button>
-            <button class="btn--main" @click="goToRegister">Register</button>
+            <!-- <button class="btn--main" @click="goToRegister">Register</button> -->
         </div>
         <div class="" v-else>
           <!-- <div class="cart">

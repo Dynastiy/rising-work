@@ -9,83 +9,83 @@
         </div>
 
         <!-- View By Id, Web View  -->
-        <div class="mt-4">
+        <div class="mt-4" id="">
             
-            <div class="single_product">
+            <div class="single_product position-relative">
                 <!-- <h1 class="text-capitalize"> {{ product.name }} </h1>
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
                     <div class="container body--content">
-                        <div>
-                            <div class=" mb-3">
-                                <h4 class="font-weight-bold text-capitalize">
-                                    {{ product.name }}
-                                </h4>
-                                <!-- <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p> -->
-                                <p class="text-secondary" v-if="product.reviews"> <span> <b>Rating</b> <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> <span> {{ product.reviews.length }} Reviews </span></p>
-                            </div>
-                            <Gallery :dataObj="dataObj"/>
-                        </div>
-                       <div class="">
-                            <div class="item--details content" id="plans">
+                        <div class="row">
+                            <div class="col-lg-8 mb-4">
+                                <div class=" mb-3">
+                                    <h4 class="font-weight-bold text-capitalize">
+                                        {{ product.name }}
+                                    </h4>
 
-                            <div class="bg-white content" >
-                                
-                                <div class="select--plan shadow-sm mb-3 d-flex flex-column justify-content-between" style="min-height:500px" v-if="plan">
-                                    <div >
-                                        <div>
-                                        <h5 class="text-uppercase text-dark text-center py-3"> {{ plan.name }} </h5>
-                                    </div>
-                                    <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
-                                   <div class="d-flex align-items-center">
-                                       <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
-                                            <div role="button"  class="text-center py-2 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
-                                                <span class="m-0"  style="font-size: 15px">${{ plan.price}}</span>  
-                                                <!-- <span> {{ plan.name }} </span>  -->
-                                            </div>
+                                    <!-- <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p> -->
+                                    <p class="text-secondary" v-if="product.reviews"> <span> <b>Rating</b> <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> <span> {{ product.reviews.length }} Reviews </span></p>
+                                </div>
+                                <Gallery :starting-image="2" :images="other_images" 
+                                    :auto-slide-interval="1500" />
+                            </div>
+                            <div class="col-lg-4 position-relative">
+                                <div class="item--details content add-sticky bg-white content" id="plans">
+
+                                    
+                                    <div class="select--plan shadow-sm mb-3 d-flex flex-column justify-content-between" style="min-height:500px" v-if="plan">
+                                        <div >
+                                            <div>
+                                            <h4 class="text-uppercase text-dark font-weight-bold text-center py-3"> {{ plan.name }} </h4>
                                         </div>
-                                   </div>
-
-                                   <div class="p-3">
-                                       <div class="">
-                                           <span class="" v-if="plan.delivery_time !== 'null' ">
-                                           <span class="material-icons " style="font-size:15px" >
-                                                event_repeat
-                                            </span> {{ plan.delivery_time }} Days Delivery</span> <span v-else>Not Specified</span> 
-                                       </div>
-                                       
-                                       <div class="d-flex align-items-center mt-3" style="gap:10px" v-for="plan_desc in plan.plan_descriptions" :key="plan_desc.id">
-                                           <span class="material-icons text-success" style="font-size:24px" >
-                                                task_alt
-                                            </span>
-                                            <span style="font-size:15px"> {{ plan_desc.name }} </span>
-                                       </div>
-                                   </div>
+                                        <!-- <label for="" class="m-0 d-block text-capitalize text-dark"> Select Plan to add to Cart </label> -->
+                                    <div class="d-flex align-items-center">
+                                        <div class="plan--selector w-100" id="myDIV" v-for="plan in plansObj" :key="plan.id" >
+                                                <div role="button"  class="text-center py-2 nav--item bg-light w-100 text" :class="{ active: (isActive === plan.id) }" @click="selectPlan(plan)">
+                                                    <span class="m-0 font-weight-bold"  style="font-size: 18px">${{ plan.price}}</span>  
+                                                    <!-- <span> {{ plan.name }} </span>  -->
+                                                </div>
+                                            </div>
                                     </div>
 
-                                    <div class="d-flex align-items-center mt-4 bg-light py-3 justify-content-between px-3" style="gap:30px">
-                                <div>
-                                    <h3 style="color: var(--primary-color)"><span v-if="product.price !== 'null' ">${{ product.price }}</span> <span v-else>Free</span> </h3>
+                                    <div class="p-3">
+                                        <div class="">
+                                            <span class="" v-if="plan.delivery_time !== 'null' ">
+                                            <span class="material-icons " style="font-size:15px" >
+                                                    event_repeat
+                                                </span> {{ plan.delivery_time }} Days Delivery</span> <span v-else>Not Specified</span> 
+                                        </div>
+                                        
+                                        <div class="d-flex align-items-center justify-content-between mt-3" style="gap:10px" v-for="plan_desc in plan.plan_descriptions" :key="plan_desc.id">
+                                                
+                                                <span class="d-block text-secondary" style="font-size:15px"> {{ plan_desc.name }} </span>
+
+                                                <span  class="material-icons d-block" style="font-size:20px; color: green;" >
+                                                    task_alt
+                                                </span>
+                                        </div>
+                                    </div>
+                                        </div>
+
+                                    <div class="mt-4  py-3 px-2">
+                                        <div role="button" class="add-to-cart text-center shadow-lg py-2" @click="addToCart"> 
+                                            <span class="material-icons" style="font-size: 14px">
+                                                shopping_cart
+                                            </span>
+                                            <span>
+                                                    Add to Cart
+                                            </span>
+                                            <span v-if="product.price !== 'null' ">(${{ product.price }})</span> <span v-else>(Free)</span> 
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div v-show="addItem" role="button" class="add-to-cart shadow-lg" @click="addToCart"> 
-                                    <span class="material-icons" style="font-size:12px">
-                                        shopping_cart
-                                    </span>
-                                   <span>
-                                        Add to Cart
-                                   </span>
-                                   
-                                </div>
-                            </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
-
-                    <hr>
-                   <section class="container features mt-5" style="" id="featured">
-                        <div>
+                   <section class="container features mt-3" style="" >
+                        <div class="row">
+                            <div class="col-lg-8">
                             <div class="mb-4">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>
                             <div class="bg-white shadow-sm p-4">
@@ -161,6 +161,7 @@
                             </div>
                         </div>
                         </div>
+                        </div>
                    </section>
 
                    
@@ -170,7 +171,7 @@
         
        
 
-        <div class="container" >
+        <div class="container" id="featured">
             <!-- Feature Products  -->
             <div class="featured--products mb-4">
                 <div class="mt-4">
@@ -213,6 +214,7 @@ export default {
             nairaFilter, percentFilter, percentageFilter, timeStamp,
             addItem: false,
             product: {},
+            other_images: [],
             slug: this.$route.params.slug,
             item_id: '',
             dataObj: {},
@@ -329,6 +331,40 @@ export default {
                 this.product = res.data.product
                 this.rating = res.data
                 this.dataObj = res.data.product
+                let dataObj = res.data.product
+                let other_images = [
+                {
+                    id: '1',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.app_icon,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.app_icon,
+                },
+                {
+                    id: '2',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.photo_one,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.photo_one,
+                },
+                {
+                    id: '3',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.photo_two,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.photo_two,
+                },
+                {
+                    id: '4',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.photo_three,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.photo_three,
+                },
+                {
+                    id: '5',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.photo_four,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.photo_four,
+                },
+                {
+                    id: '6',
+                    big: 'https://api.risingwork.com/services/photos/'+dataObj.photo_five,
+                    thumb: 'https://api.risingwork.com/services/photos/'+dataObj.photo_five,
+                }
+            ];
+            this.other_images = other_images
                 this.reviews = res.data.product.reviews;
                 this.plansObj = res.data.product.plans
                 let plan_id = res.data.product.plans[0].id
@@ -361,40 +397,24 @@ export default {
         }
     },
     mounted(){
+        console.log(this.other_images);
             this.getProductId()
             this.getTrending()
-            window.onscroll = function() {myFunction()};
-            var navbar = document.getElementById("plans")
-            var featuredItems = document.getElementById('featured')
-            // var sticky = navbar.offsetTop;
-            var sticky2 = featuredItems.offsetTop;
-            function myFunction() {
-                if (window.pageYOffset < sticky2) {
-                navbar.classList.add("sticky")
-                }
-                
-                // else if(window.pageYOffset >= sticky2) {
-                //     navbar.classList.remove("sticky")
-                // }
-                else {
-                navbar.classList.remove("sticky");
-                }
-            }
+           
+            
     },
     computed:{
       loggedIn(){
         return this.$store.getters.isLoggedIn
       }
+      
     }
 }
 </script>
 
-<style>
-    .sticky {
-  position: fixed;
-  top: 0;
-  width: 30%;
-  z-index: 999;
-  padding-top: 160px ;
-}
+<style scoped>
+    .add-sticky {
+    position: sticky !important;
+    top: 80px
+    }
 </style>
