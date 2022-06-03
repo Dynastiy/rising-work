@@ -15,7 +15,7 @@
                 <form action="" @submit.prevent="searchProduct"> 
                   <div class="input--field">
                     <input type="search" name="" id="" v-model="search_data" />
-                    <input type="button" value="Search"/>
+                    <input type="button" value="Search" @click="searchProduct"/>
                   </div>
                 </form>
               
