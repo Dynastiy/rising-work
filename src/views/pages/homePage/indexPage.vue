@@ -11,10 +11,14 @@
                 around the world and build your brand through custom, memorable
                 design.
               </p>
-              <div class="input--field">
-                <input type="search" name="" id=""  />
-                <input type="button" value="Search" />
-              </div>
+             
+                <form action="" @submit.prevent="searchProduct"> 
+                  <div class="input--field">
+                    <input type="search" name="" id="" v-model="search_data" />
+                    <input type="button" value="Search"/>
+                  </div>
+                </form>
+              
               <div>
                 <div class="trending--products">
                   <h5 class="text-secondary">Trending Services:</h5>
@@ -141,7 +145,8 @@ export default {
       return {
         products: [],
         url: 'https://api.risingwork.com/',
-        top_rated_products: ''
+        top_rated_products: '',
+        search_data: ''
       }
     },
     methods:{
@@ -153,6 +158,20 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async searchProduct() {
+          this.$router.push({ name:'product-details', query:{ name: this.search_data } })
+          // this.loading = true;
+          // try {
+          //   let res = await this.$axios.get(
+          //     `/all-products?name=${this.search_data}`
+          //   );
+          //   console.log(res.data);
+          //   this.$router.push({ name:'product-details', query:{ name:  } })
+          // } catch (error) {
+          //   console.log(error);
+          // }
+          // this.loading = false;
         },
         async getTopRated(){
             try {

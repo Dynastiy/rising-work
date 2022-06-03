@@ -22,6 +22,7 @@
     "vue-router": "^3.5.1",
     "vue-slick": "^1.1.20",
     "vue-star-rating": "^1.7.0",
+    "vue-sticky-directive": "^0.0.10",
     "vue-sticky-element": "^1.1.2",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"

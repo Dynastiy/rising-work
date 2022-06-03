@@ -68,7 +68,7 @@
                                         </div>
 
                                     <div class="mt-4  py-3 px-2">
-                                        <div role="button" class="add-to-cart text-center shadow-lg py-2" @click="addToCart"> 
+                                        <div role="button" class="add-to-cart text-center py-2" @click="addToCart"> 
                                             <span class="material-icons" style="font-size: 14px">
                                                 shopping_cart
                                             </span>
@@ -200,11 +200,13 @@
 </template>
 
 <script>
+import Sticky from 'vue-sticky-directive'
 import { nairaFilter, percentFilter, percentageFilter, timeStamp } from '@/plugins/filters.js'
 import Gallery from '@/components/galleryView.vue'
 // import GalleryMobile from '@/components/galleryViewMobile.vue'
 // import Plans from '@/components/plansView.vue'
 export default {
+    directives: {Sticky},
     components:{
         Gallery, 
         // GalleryMobile,
@@ -413,8 +415,9 @@ export default {
 </script>
 
 <style scoped>
-    .add-sticky {
+    div.add-sticky {
+        position: -webkit-sticky;
     position: sticky !important;
-    top: 80px
+    top: 0;
     }
 </style>

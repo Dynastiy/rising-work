@@ -56,7 +56,7 @@ body.active {
     border-radius: 15px;
     padding: 0.7rem 0.5rem;
     outline: none;
-    color: #000;
+    color: #fff;
 }
 
 .hero--section .input--field input[type="button"] {
