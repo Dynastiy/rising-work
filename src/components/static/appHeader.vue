@@ -39,36 +39,36 @@
       </div>
 
       <div class="mobile--menu px-4">
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="row align-items-center justify-content-between">
           
-          <div >
+          <div class="col-3">
             <span class="material-icons text-white" id="tog" style="font-size:30px"  role="button">
               menu
             </span>
           </div>
 
-        <div class="">
+        <div class="col-6 text-center">
           <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
         </div>
 
-          <div class="">
+          <div class="col-3">
             <div v-if="!loggedIn"> 
-            <button class="add--button btn btn-light">
-              <router-link to="/sign-in" class="text-dark">Sign In</router-link>
-            </button>
-          </div>
-            <div class="dropleft " v-else>
-            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
-             <span class="d-flex text-light material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
-              account_circle_full
-            </span>
-            <!-- </button> -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
-              <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
-              <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
+              <button class="add--button btn btn-light">
+                <router-link to="/sign-in" class="text-dark">Sign In</router-link>
+              </button>
             </div>
-          </div>
+              <div class="dropleft" v-else>
+              <div class="">
+                <span class="text-light  material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
+                    account_circle_full
+                </span>
+              </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
+                <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
+                <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
+              </div>
+            </div>
           </div>
         
         </div>
