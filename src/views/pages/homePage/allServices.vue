@@ -20,7 +20,7 @@
           <div>
             <div v-for="item in products" :key="item.id" class="mb-5">
                 <div>
-                    <h4 class="mb-3 text-dark">{{ item.category_name }}</h4>
+                    <h2 class="mb-3 font-weight-bold text-dark">{{ item.category_name }}</h2>
                     <div  v-if="item.products.length === 0 ">
                         <span class="cancelled">No Products in this category</span>
                     </div>
