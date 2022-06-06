@@ -3,7 +3,7 @@
     <div class="app--header">
       <div class="container menu ">
         <div class="">
-          <router-link to="/"> <img src="@/assets/img/rising.svg" width="150" alt="" srcset=""> </router-link>
+          <router-link to="/"> <img src="@/assets/img/rising.svg" width="200" alt="" srcset=""> </router-link>
         </div>
         <div class="other--menu ml-auto">
           <router-link class="" to="/categories">Services</router-link>

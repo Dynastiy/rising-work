@@ -195,10 +195,3 @@ export default {
 }
 </script>
 
-<style>
-.animated-content{
-
-  --animate-duration: 6s;
-
-}
-</style>

@@ -58,11 +58,16 @@
                                         
                                         <div class="d-flex align-items-center justify-content-between mt-3" style="gap:10px" v-for="plan_desc in plan.plan_descriptions" :key="plan_desc.id">
                                                 
-                                                <span class="d-block text-secondary" style="font-size:15px"> {{ plan_desc.name }} </span>
+                                                <span class="d-block text-secondary text-capitalize" style="font-size:15px"> {{ plan_desc.name }} </span>
 
-                                                <span  class="material-icons d-block" style="font-size:20px; color: green;" >
-                                                    task_alt
-                                                </span>
+                                                <div>
+                                                    <span v-if="plan_desc.status == 'available' " class="material-icons d-block" style="font-size:20px; color: green;" >
+                                                    check
+                                                    </span>
+                                                    <span v-else class="material-icons d-block" style="font-size:20px; color: red;" >
+                                                        close
+                                                    </span>
+                                                </div>
                                         </div>
                                     </div>
                                         </div>
