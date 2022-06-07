@@ -27,7 +27,10 @@
                                     </div>
                                     <div>
                                         <h4 class="font-weight-bold text-capitalize"> {{ cart.product_name }} </h4>
-                                        <p class="small text-capitalize"> {{product.description}} </p>
+                                        <div class="text-capitalize" v-html="product.description">
+
+                                        </div>
+                                        <!-- <p class="small text-capitalize"> {{product.description}} </p> -->
                                         <div class="plan mt-2 " style="gap: 2rem" v-for="plan in cart.plans" :key="plan.id">
                                             <div class="d-flex align-items-center" style="gap:5px">
                                                 <h6 class="font-weight-bold"> Plan: </h6>
