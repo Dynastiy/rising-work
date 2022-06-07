@@ -11,6 +11,10 @@
                         <small class="text-muted">
                             {{ timeStamp(overviewData.created_at) }}
                         </small>
+                        <div class="mt-3" v-if="overviewData.status == 'delivered' ">
+                            <button class="btn btn-success">Add Review</button>
+                            <button class="btn btn-success">Add Rating</button>
+                        </div>
                     </div>
                     <div class="right" :class="overviewData.status">
                         <span class="text-capitalize">Status:  {{ overviewData.status }} </span>
@@ -36,9 +40,7 @@
 
                 <hr>
 
-                <div class="features">
-                    <!-- <p class="text-secondary"> {{  }} </p> -->
-                </div>
+                
             </div>
         </div>
     </div>

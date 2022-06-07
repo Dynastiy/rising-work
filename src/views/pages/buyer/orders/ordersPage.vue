@@ -97,7 +97,7 @@ export default {
             this.$axios.get('/user-dashboard')
             .then((res)=>{
                 this.orders = res.data.user.data[0].inprogress_orders;
-                console.log(this.orders);
+                console.log(res.data);
             })
             .catch((err)=>{
                 console.log(err);

@@ -830,7 +830,7 @@ body.active {
 	border-radius: 100%;
 	border: 5px solid #fff;
 }
-.img-circle span {
+.img-circle .span--user {
 	height: 100px;
 	width: 100px;
     display: flex;
@@ -1156,4 +1156,52 @@ ol li {
 .features {
     display: grid;
     /* grid-template-columns: 60% 40%; */
+}
+.img-circle {
+    position: relative;
+}
+.edit--button {
+    position: absolute;
+    right: 25%;
+    bottom: 5%;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.canceled {
+    background-color: rgb(255, 198, 198);
+    color: red;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+
+.delivered {
+    background-color: #CBF4C9;
+    color: rgb(3, 116, 3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+
+.pending {
+    background-color: rgb(255, 229, 189);
+    color: #ffb20f;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+.in-progress {
+    color: #17a2b8;
+    background-color: #17a3b840;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+.completed {
+    color: #20c997;
+    background-color: #20c9964a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
 }

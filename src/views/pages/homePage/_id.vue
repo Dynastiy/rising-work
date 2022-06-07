@@ -89,7 +89,7 @@
                         </div>
                     </div>
                    <section class="container features mt-3" style="" >
-                        <div class="row">
+                        <div class="row" v-if="product.features.length !== 0 ">
                             <div class="col-lg-8">
                             <div class="mb-4">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>

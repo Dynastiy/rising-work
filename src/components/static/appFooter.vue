@@ -7,10 +7,10 @@
           <div class="col-md-3">
             <h4 class="footer--header">Company</h4>
             <ul class="list-unstlyed">
-                <li> <a target="_blank" href="https://samzuga.exchange/">About</a> </li>
-                <li> <a target="_blank" href="https://africanapp.store/"> Privacy Policy</a></li>
-                <li> <a target="_blank" href="https://samzuga.exchange/">Terms and Conditions</a> </li>
-                <li> <a target="_blank" href="https://africanapp.store/"> Refund Policy</a></li>
+                <li> <a target="_blank" href="#">About</a> </li>
+                <li> <a target="_blank" href="#"> Privacy Policy</a></li>
+                <li> <a target="_blank" href="#">Terms and Conditions</a> </li>
+                <li> <a target="_blank" href="#"> Refund Policy</a></li>
             </ul>
             
           </div>
@@ -38,11 +38,28 @@
               <h4>
                   Contact Us
               </h4>
-              <h6 class="text-white">Follow Us</h6>
-              <ul class="list-unstlyed d-flex align-items-center" style="gap:10px">
-                  <a target="_blank" href="http://facebook.com/officialbuybnb/"> 
-                  Facebook
-                  </a>
+              <!-- <h6 class="text-white">Follow Us</h6> -->
+              <ul class="list-unstlyed ">
+                  <li>
+                    <a target="_blank" href="https://fb.me/risingworks"> 
+                    Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a target="_blank" href="https://instagram.com/risingwork"> 
+                    Instagram
+                    </a>
+                  </li>
+                  <li>
+                    <a target="_blank" href="https://twitter.com/risingwork"> 
+                    Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a target="_blank" href="https://linkedin.com/in/risingwork"> 
+                    Linkedin
+                    </a>
+                  </li>
                   <!-- <a target="_blank" href="https://t.me/officialzugacoin"><i class="fa fa-telegram" aria-hidden="true"></i></a> -->
               </ul>
           </div>

@@ -30,7 +30,7 @@
             </span>
             <!-- </button> -->
             <div class="dropdown-menu" >
-              <router-link to="/dashboard/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
+              <router-link to="/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
               <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
               <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
             </div>

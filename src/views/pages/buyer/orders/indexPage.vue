@@ -7,7 +7,7 @@
                 <h6 class="text-muted text-uppercase small">Total Orders</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-info">
-                        {{ orders.orders_count }}
+                        {{ orders.orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-info" style="font-size:40px" icon="carbon:cost-total" />
                 </div>
@@ -16,7 +16,7 @@
                 <h6 class="text-muted text-uppercase small">Delivered Transactions</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-success">
-                        {{ order.delivered_orders_count }}
+                        {{ order.delivered_orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-success" style="font-size:40px" icon="carbon:cost-total" />
                 </div>
@@ -25,7 +25,7 @@
                 <h6 class="text-muted text-uppercase small">completed orders</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-primary">
-                        {{ order.completed_orders_count }}
+                        {{ order.completed_orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-primary" style="font-size:40px" icon="carbon:cost-total" />
                 </div>
@@ -34,7 +34,7 @@
                 <h6 class="text-muted text-uppercase small">Pending Transactions</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-warning">
-                        {{ order.pending_orders_count }}
+                        {{ order.pending_orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-warning" style="font-size:40px" icon="carbon:cost-total" />
                 </div>
@@ -43,7 +43,7 @@
                 <h6 class="text-muted text-uppercase small">Inprogress Transactions</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-info">
-                        {{ order.inprogress_orders_count }}
+                        {{ order.inprogress_orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-info" style="font-size:40px" icon="carbon:cost-total" />
                 </div>
@@ -52,7 +52,7 @@
                 <h6 class="text-muted text-uppercase small">Cancelled Transactions</h6>
                 <div class="d-flex mt-3 justify-content-between">
                     <h1 class="text-danger">
-                        {{ order.canceled_orders_count }}
+                        {{ order.canceled_orders_count || 0 }}
                     </h1>
                     <IconComponent class="text-danger" style="font-size:40px" icon="carbon:cost-total" />
                 </div>

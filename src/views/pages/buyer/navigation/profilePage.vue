@@ -8,13 +8,19 @@
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
 						<div class="img-circle text-center mb-3">
-							<img v-if="getUser.profile_photo" src="img/user2.jpg" alt="Image" class="shadow">
-                            <span v-else :class="getUser.first_name.charAt(0)"> {{ getUser.first_name.charAt(0) }} </span>
+							<img v-if="userData.profile_photo" src="img/user2.jpg" alt="Image" class="shadow">
+                            <div class="span--user" v-else :class="userData.first_name.charAt(0)"> {{ userData.first_name.charAt(0) }} </div>
+							<div class="edit--button" role="button" @click="changePhoto()">
+								<span class="material-icons">
+									edit
+								</span>
+							</div>
 						</div>
-						<h5 class="text-center">{{ getUser.first_name }} {{ getUser.last_name }}</h5>
+						
+						<h5 class="text-center">{{ userData.first_name }} {{ userData.last_name }}</h5>
                         <div class="d-flex align-items-center justify-content-center mt-2" style="gap:10px">
                             <div class="status ">
-                                <div class="completed" v-if="getUser.status === 'active' ">
+                                <div class="completed" v-if="userData.status === 'active' ">
                                     Active
                                 </div>
                                 <div class="cancelled" v-else>
@@ -86,7 +92,7 @@
 							</div>
 						</div>
 						<div class="text-right">
-							<button class="btn--main">Update</button>
+							<button class="btn--main" @click="updateProfile()">Update</button>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
@@ -143,13 +149,19 @@ export default {
     methods:{
         async getCountries(){
       let res = await this.$axios.get('https://restcountries.com/v2/all')
-      console.log(res);
-	
       this.countries = res.data
     },
 	async updateProfile(){
+		let payload =  {
+                first_name: this.userData.first_name,
+                last_name: this.userData.last_name,
+                phone_no: this.userData.phone_no,
+                about: this.userData.about,
+                country: this.userData.country,
+                email: this.userData.email
+            }
 		try {
-			let res = await this.$axios.post('/auth/update-profile/', this.userData)
+			let res = await this.$axios.post('/auth/update-profile', payload)
 			console.log(res);
 			this.$toastify({
           text: `${res.data.message}`,
@@ -161,8 +173,20 @@ export default {
 		} catch (error) {
 			console.log(error);
 		}
-		this.userData = this.$store.getters.getUser
+		this.getUser()
 	},
+	getUser(){
+            this.$axios.get('/user-dashboard')
+            .then((res)=>{
+                console.log(res.data.user_orders_total.data[0]);
+				this.userData = res.data.user_orders_total.data[0]
+                // this.order = res.data.user.data[0];
+                // this.orders = res.data.user_orders_total.data[0]
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        },
 	async updatePassword(){
 		try {
 			let res = await this.$axios.post('/auth/change-password/', this.credentials)
@@ -181,13 +205,11 @@ export default {
 	}
     },
     mounted(){
-        this.userData = this.$store.getters.getUser
         this.getCountries()
+		this.getUser()
     },
     computed:{
-        getUser(){
-            return this.$store.getters.getUser
-        }
+        
     }
 }
 </script>
