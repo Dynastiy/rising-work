@@ -1209,3 +1209,11 @@ ol li {
 ul li {
     margin-left: 1rem;
 }
+
+.checkout--item h4, .checkout--item h3, .checkout--item h2 {
+    font-size: 1.2rem;
+}
+
+.checkout--item p {
+    font-size: 0.9rem;
+}
