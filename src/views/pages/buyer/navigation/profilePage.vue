@@ -161,7 +161,7 @@ export default {
                 email: this.userData.email
             }
 		try {
-			let res = await this.$axios.post('/auth/update-profile', payload)
+			let res = await this.$axios.post('/auth/update-profile-details', payload)
 			console.log(res);
 			this.$toastify({
           text: `${res.data.message}`,

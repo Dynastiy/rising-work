@@ -25,9 +25,9 @@
           
           <div class="dropleft ">
             <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
-             <span class="text-light material-icons" type="button" data-toggle="dropdown" >
-              account_circle_full
-            </span>
+             <button class="text-dark add--button btn btn-light" type="button" data-toggle="dropdown" >
+            User
+            </button>
             <!-- </button> -->
             <div class="dropdown-menu" >
               <router-link to="/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
