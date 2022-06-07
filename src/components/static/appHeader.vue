@@ -23,18 +23,19 @@
             </div>
           </div> -->
           
-          <div class="dropleft ">
-            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> -->
+          <div>
+            <h5 v-if="user" class="text-white"> Hello, <span style="color:var(--secondary-color)">{{ user.first_name }}</span> </h5>
+          </div>
+          <!-- <div class="dropleft ">
              <button class="text-dark add--button btn btn-light" type="button" data-toggle="dropdown" >
             User
             </button>
-            <!-- </button> -->
             <div class="dropdown-menu" >
               <router-link to="/profile" class="dropdown-item text-dark" href="#">Profile</router-link>
               <router-link to="/dashboard" class="dropdown-item text-dark" href="#">Dashboard</router-link>
               <a class="dropdown-item text-dark" href="javascript:void(0)" @click="logout">Logout</a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
