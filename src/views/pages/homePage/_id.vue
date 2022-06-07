@@ -91,7 +91,7 @@
                    <section class="container features mt-3" style="" >
                         <div class="row" v-if="product.features.length !== 0 ">
                             <div class="col-lg-8">
-                            <div class="mb-4">
+                            <div class="mb-4" v-if="product.features.length !== 0 ">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>
                             <div class="bg-white shadow-sm p-4">
                                 <div class="row additional-items mb-2" role="button" v-for="feature in product.features" :key="feature.id">
