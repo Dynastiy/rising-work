@@ -56,7 +56,7 @@
                                                 </span> {{ plan.delivery_time }} Days Delivery</span> <span v-else>Not Specified</span> 
                                         </div>
                                         
-                                        <div class="d-flex align-items-center justify-content-between mt-3" style="gap:10px" v-for="plan_desc in plan.plan_descriptions" :key="plan_desc.id">
+                                        <div class="d-flex align-items-center justify-content-between mt-3" style="gap:10px" v-for="plan_desc in plan.descriptions" :key="plan_desc.id">
                                                 
                                                 <span class="d-block text-secondary text-capitalize" style="font-size:15px"> {{ plan_desc.name }} </span>
 
@@ -254,10 +254,10 @@ export default {
             this.addPrice()
         },
         findPlan(plan){
-            this.$axios.get(`/find-plan/${plan}`)
+            this.$axios.get(`/get-plan-description/${plan}`)
             .then((res)=>{
                 console.log(res);
-                this.plan = res.data.plan
+                this.plan = res.data
             })
         },
         async getTrending(){
