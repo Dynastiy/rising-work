@@ -10,7 +10,7 @@
                 <li> <a target="_blank" href="#">About</a> </li>
                 <li> <a target="_blank" href="#"> Privacy Policy</a></li>
                 <li> <a target="_blank" href="#">Terms and Conditions</a> </li>
-                <li> <a target="_blank" href="#"> Refund Policy</a></li>
+                <!-- <li> <a target="_blank" href="#"> Refund Policy</a></li> -->
             </ul>
             
           </div>
