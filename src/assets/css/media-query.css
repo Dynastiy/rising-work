@@ -198,4 +198,10 @@
             transition: all 250ms;
             object-fit: cover;
         }
+        .additional {
+            margin-top: unset;
+        }
+        .item--details {
+            margin-top: 1rem;
+        }
     }

@@ -111,8 +111,8 @@
                 <span class="d-block"> {{ product.delivery_time }} Days <span class="text-white">Delivery</span> </span> </span>
             </div>
           </article> -->
-          <div class="professional__card" v-for="product in top_rated_products" :key="product.id">
-            <div class="card__top" role="button" @click="viewProduct(product.slug)">
+          <div class="professional__card" v-for="product in top_rated_products" :key="product.id" role="button" @click="viewProduct(product.slug)">
+            <div class="card__top" >
             <img :src="`${url}/services/photos/${product.app_icon}`" alt="">
             </div>
             <div class="d-flex justify-content-between p-2">

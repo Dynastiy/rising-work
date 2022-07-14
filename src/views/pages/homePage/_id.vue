@@ -36,112 +36,17 @@
                   :images="other_images"
                   :auto-slide-interval="1500"
                 />
-
-                <!-- Additional Features  -->
-                <section class="features" style="">
-                  <div class="mt-4">
-                    <div class="mb-4" v-if="product.features.length !== 0">
-                      <h4 class="m-0 text-dark mb-3 font-weight-bold">Additional Features</h4>
-                      <div class="bg-white shadow-sm p-4">
-                        <div
-                          class="row additional-items mb-2"
-                          role="button"
-                          v-for="feature in product.features"
-                          :key="feature.id"
-                        >
-                          <input
-                            type="checkbox"
-                            class="col select-feature"
-                            :id="feature.id"
-                            :value="feature"
-                            v-model="cartItem"
-                            @change="addPrice"
-                          />
-                          <label
-                            :for="feature.id"
-                            class="col-11 m-0 text-capitalize"
-                          >
-                            <div class="d-flex justify-content-between">
-                              <div class="">
-                                <h5 class="font-weight-bold">
-                                  {{ feature.name }}
-                                </h5>
-                                <h6 class="text-secondary">
-                                  {{ feature.name }}
-                                </h6>
-                              </div>
-                              <h3 class=" font-weight-bold">+${{ feature.price }}</h3>
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-
-                      <hr />
-                      <div class="description mb-4 mt-2">
-                        <!-- <p class="text-capitalize"> {{ product.description }} </p> -->
-                        <div v-html="product.description"></div>
-                      </div>
-
-                      <div>
-                        <div class="ratings--reviews bg-white p-3 shadow-sm">
-                          <div class="">
-                            <div class="">
-                              <h4 class="font-weight-bold">
-                                Reviews
-                                <span class="small">
-                                  ({{ reviews.length }} Reviews)
-                                </span>
-                              </h4>
-                            </div>
-                            <div v-if="posting">
-                              <p class="text-danger">Posting...</p>
-                            </div>
-                            <div v-if="reviews.length === 0" class="mt-3">
-                              <span class="cancelled"
-                                >No Reviews for this product yet</span
-                              >
-                            </div>
-                            <div v-else>
-                              <div
-                                v-for="review in reviews"
-                                class="d-flex mt-3"
-                                style="gap: 20px"
-                                :key="review.id"
-                              >
-                                <div>
-                                  <span
-                                    class="b user--avatar"
-                                    :class="[review.reviewer_name.charAt(0)]"
-                                  >
-                                    {{ review.reviewer_name.charAt(0) }}
-                                  </span>
-                                </div>
-                                <div class="">
-                                  <h5>{{ review.reviewer_name }}</h5>
-                                  <p class="small">{{ review.comment }}</p>
-                                  <small class="text-secondary"
-                                    >Posted {{ timeStamp(review.created_at) }}
-                                  </small>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
               </div>
               <div class="col-lg-4">
                 <div
-                  class="item--details content add-sticky bg-white content"
+                  class="item--details content position-sticky bg-white content"
                   id="plans"
                 >
                   <div
                     class="
                       select--plan
                       shadow-sm
-                      mb-3
+                      mb-3 
                       d-flex
                       flex-column
                       justify-content-between
@@ -265,6 +170,102 @@
                 </div>
               </div>
             </div>
+            <!-- Additional Features  -->
+                <div class="row additional">
+                    <section class="features col-md-8" style="">
+                  <div class="mt-4">
+                    <div class="mb-4" v-if="product.features.length !== 0">
+                      <h4 class="m-0 text-dark mb-3 font-weight-bold">Additional Features</h4>
+                      <div class="bg-white shadow-sm p-4">
+                        <div
+                          class="row additional-items mb-2"
+                          role="button"
+                          v-for="feature in product.features"
+                          :key="feature.id"
+                        >
+                          <input
+                            type="checkbox"
+                            class="col select-feature"
+                            :id="feature.id"
+                            :value="feature"
+                            v-model="cartItem"
+                            @change="addPrice"
+                          />
+                          <label
+                            :for="feature.id"
+                            class="col-11 m-0 text-capitalize"
+                          >
+                            <div class="d-flex justify-content-between">
+                              <div class="">
+                                <h5 class="font-weight-bold">
+                                  {{ feature.name }}
+                                </h5>
+                                <h6 class="text-secondary">
+                                  {{ feature.name }}
+                                </h6>
+                              </div>
+                              <h3 class=" font-weight-bold">+${{ feature.price }}</h3>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="description mb-4 mt-2">
+                        <!-- <p class="text-capitalize"> {{ product.description }} </p> -->
+                        <div v-html="product.description"></div>
+                      </div>
+
+                      <div>
+                        <div class="ratings--reviews bg-white p-3 shadow-sm">
+                          <div class="">
+                            <div class="">
+                              <h4 class="font-weight-bold">
+                                Reviews
+                                <span class="small">
+                                  ({{ reviews.length }} Reviews)
+                                </span>
+                              </h4>
+                            </div>
+                            <div v-if="posting">
+                              <p class="text-danger">Posting...</p>
+                            </div>
+                            <div v-if="reviews.length === 0" class="mt-3">
+                              <span class="cancelled"
+                                >No Reviews for this product yet</span
+                              >
+                            </div>
+                            <div v-else>
+                              <div
+                                v-for="review in reviews"
+                                class="d-flex mt-3"
+                                style="gap: 20px"
+                                :key="review.id"
+                              >
+                                <div>
+                                  <span
+                                    class="b user--avatar"
+                                    :class="[review.reviewer_name.charAt(0)]"
+                                  >
+                                    {{ review.reviewer_name.charAt(0) }}
+                                  </span>
+                                </div>
+                                <div class="">
+                                  <h5>{{ review.reviewer_name }}</h5>
+                                  <p class="small">{{ review.comment }}</p>
+                                  <small class="text-secondary"
+                                    >Posted {{ timeStamp(review.created_at) }}
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                </div>
           </div>
         </section>
       </div>
@@ -276,8 +277,8 @@
         <div class="mt-4">
           <h4 class="mb-4 font-weight-bold">Related Services</h4>
           <section class="cards content">
-             <div class="professional__card" v-for="product in products.data" :key="product.id">
-            <div class="card__top" role="button" @click="viewProduct(product.slug)">
+             <div class="professional__card" v-for="product in products.data" :key="product.id" role="button"  @click="viewProduct(product.slug)">
+            <div class="card__top" >
             <img :src="`${url}/services/photos/${product.app_icon}`" alt="">
             </div>
             <div class="d-flex justify-content-between p-2">

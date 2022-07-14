@@ -1328,3 +1328,7 @@
     .professional__card {
         transform: translate(1.3, 1.5);
     }
+    
+    .additional {
+        margin-top: -120px;
+    }

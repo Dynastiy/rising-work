@@ -35,11 +35,11 @@
                       class="professional__card"
                       v-for="product in item.products"
                       :key="product.id"
+                      role="button" @click="viewProduct(product.slug)"
                     >
                       <div
                         class="card__top"
-                        role="button"
-                        @click="viewProduct(product.slug)"
+                        
                       >
                         <img
                           :src="`${url}/services/photos/${product.app_icon}`"
