@@ -16,9 +16,9 @@
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
                     <div class="container body--content">
-                        <div class="row">
-                            <div class="col-lg-8 mb-4">
-                                <div class=" mb-3">
+                        <div class="d-flex">
+                            <div class="col-lg-8">
+                                <div class="">
                                     <h4 class="font-weight-bold text-capitalize">
                                         {{ product.name }}
                                     </h4>
@@ -26,10 +26,92 @@
                                     <!-- <p class="small font-weight-bold text-uppercase" style="color:var(--primary-color)" v-if="product.category"><span class="text-dark">Category:</span> {{ product.category.category_name }} </p> -->
                                     <p class="text-secondary" v-if="product.reviews"> <span> <b>Rating</b> <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> <span> {{ product.reviews.length }} Reviews </span></p>
                                 </div>
-                                <Gallery :starting-image="2" :images="other_images" 
+                                <Gallery class="mb-2" :starting-image="2" :images="other_images" 
                                     :auto-slide-interval="1500" />
+
+                                    <!-- Additional Features  -->
+                                     <section class="container features" style="" >
+                        <div class="mt-4">
+                            <div class="">
+                            <div class="mb-4" v-if="product.features.length !== 0 ">
+                            <h4 class="m-0 text-dark mb-3">Additional Features</h4>
+                            <div class="bg-white shadow-sm p-4">
+                                <div class="row additional-items mb-2" role="button" v-for="feature in product.features" :key="feature.id">
+                                <input type="checkbox" class="col select-feature" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
+                                <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <h5 >
+                                            {{ feature.name }}
+                                            </h5> 
+                                            <h6 class="text-secondary">
+                                                {{ feature.name }}
+                                            </h6>
+                                        </div>
+                                        <h2 class="col-3">+${{ feature.price }}</h2>
+                                    </div> 
+                                </label>
                             </div>
-                            <div class="col-lg-4 position-relative">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="description mb-4 mt-2">
+                                <!-- <p class="text-capitalize"> {{ product.description }} </p> -->
+                                 <div v-html="product.description"></div>
+                        </div>
+
+                        <div>
+                            <div class="ratings--reviews bg-white p-3 shadow-sm " >
+                                    <!-- <div class="ratings ">
+                                        <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
+                                    </div> -->
+
+                                    <div class="">
+                                        <div class="">
+                                            <h5> Reviews <span class="small"> ({{ reviews.length }} Reviews) </span> </h5>
+                                        </div>
+                                        <div v-if="posting">
+                                            <p class="text-danger">Posting...</p>
+                                        </div>
+                                        <div  v-if="reviews.length === 0 " class="mt-3">
+                                            <span  class="cancelled">No Reviews for this product yet</span>
+                                        </div>
+                                        <div v-else >
+                                            <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
+                                                <div>
+                                                    <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
+                                                        {{ review.reviewer_name.charAt(0) }}
+                                                    </span>
+                                                </div>
+                                                <div class="">
+                                                    <h5> {{ review.reviewer_name }} </h5>
+                                                    <p class="small"> {{ review.comment }} </p>
+                                                    <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Add Review  -->
+                                        <!-- <div class="mt-4" v-show="loggedIn">
+                                            
+                                            <form action="" @submit.prevent="addReview">
+                                                <div class="add--review">
+                                                    <input type="text" v-model="comment" placeholder="Enter a Review">
+                                                    <button type="submit" style="background-color: transparent; border:none">
+                                                        <IconComponent icon="akar-icons:send" style="font-size:30px"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            
+                                        </div> -->
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                   </section>
+                            </div>
+                            <div class="col-lg-4">
                                 <div class="item--details content add-sticky bg-white content" id="plans">
 
                                     
@@ -88,86 +170,7 @@
                             </div>
                         </div>
                     </div>
-                   <section class="container features mt-3" style="" >
-                        <div class="row">
-                            <div class="col-lg-8">
-                            <div class="mb-4" v-if="product.features.length !== 0 ">
-                            <h4 class="m-0 text-dark mb-3">Additional Features</h4>
-                            <div class="bg-white shadow-sm p-4">
-                                <div class="row additional-items mb-2" role="button" v-for="feature in product.features" :key="feature.id">
-                                <input type="checkbox" class="col select-feature" :id="feature.id" :value="feature" v-model="cartItem" @change="addPrice">
-                                <label :for="feature.id" class="col-11 m-0 text-capitalize"> 
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <h5 >
-                                            {{ feature.name }}
-                                            </h5> 
-                                            <h6 class="text-secondary">
-                                                {{ feature.name }}
-                                            </h6>
-                                        </div>
-                                        <h2 class="col-3">+${{ feature.price }}</h2>
-                                    </div> 
-                                </label>
-                            </div>
-                            </div>
-                        </div>
-
-                        <hr>
-                        <div class="description my-4">
-                                <!-- <p class="text-capitalize"> {{ product.description }} </p> -->
-                                 <div v-html="product.description"></div>
-                        </div>
-
-                        <div>
-                            <div class="ratings--reviews bg-white p-3 shadow-sm " >
-                                    <!-- <div class="ratings ">
-                                        <h3 v-if="reviews">{{ reviews.length }} Reviews</h3>
-                                    </div> -->
-
-                                    <div class="">
-                                        <div class="">
-                                            <h5> Reviews <span class="small"> ({{ reviews.length }} Reviews) </span> </h5>
-                                        </div>
-                                        <div v-if="posting">
-                                            <p class="text-danger">Posting...</p>
-                                        </div>
-                                        <div  v-if="reviews.length === 0 " class="mt-3">
-                                            <span  class="cancelled">No Reviews for this product yet</span>
-                                        </div>
-                                        <div v-else >
-                                            <div v-for="review in reviews" class="d-flex mt-3" style="gap:20px" :key="review.id">
-                                                <div>
-                                                    <span class="b user--avatar" :class="[review.reviewer_name.charAt(0)]">
-                                                        {{ review.reviewer_name.charAt(0) }}
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <h5> {{ review.reviewer_name }} </h5>
-                                                    <p class="small"> {{ review.comment }} </p>
-                                                    <small class="text-secondary">Posted {{ timeStamp(review.created_at) }} </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Add Review  -->
-                                        <!-- <div class="mt-4" v-show="loggedIn">
-                                            
-                                            <form action="" @submit.prevent="addReview">
-                                                <div class="add--review">
-                                                    <input type="text" v-model="comment" placeholder="Enter a Review">
-                                                    <button type="submit" style="background-color: transparent; border:none">
-                                                        <IconComponent icon="akar-icons:send" style="font-size:30px"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                            
-                                        </div> -->
-                                    </div>
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-                   </section>
+                  
 
                    
                 </section>
