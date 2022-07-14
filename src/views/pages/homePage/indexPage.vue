@@ -5,7 +5,7 @@
         <div class="container py-5">
           <div class="row align-items-center">
             <div class="col-md-6">
-              <h1 class="mb-4" data-aos="fade-up-right">World Class <span style="color:var(--secondary-color)">design</span> at your service.</h1>
+              <h1 class="mb-4 font-weight-bold" data-aos="fade-up-right">World Class <span style="color:var(--secondary-color)" class="font-weight-bold">design</span> at your service.</h1>
               <p class="text-white">
                 We make it easy to work with professional, creative experts from
                 around the world and build your brand through custom, memorable
@@ -21,7 +21,7 @@
               
               <div>
                 <div class="trending--products">
-                  <h5 class="text-secondary">Trending Services:</h5>
+                  <h5 class="text-white">Trending Services:</h5>
                   <div class="text-white trending" style="gap:15px" v-for="product in products.data" :key="product.id">
                     <a class="text-secondary m-0" role="button" @click="viewProduct(product.slug)"> {{product.name}}  </a>
                   </div>
@@ -47,7 +47,7 @@
       <!-- Feature Products  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h1 class="mb-4"><span style="color: var(--secondary-color)">Trending</span> Services</h1>
+          <h4 class="mb-4 font-weight-bold"><span class="font-weight-bold" style="color: var(--secondary-color)">Trending</span> Services</h4>
           <div class="">
             <!-- <div v-for="product in products.data" :key="product.id">
                 <div class="creative--services creative--services1" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)">
@@ -67,7 +67,7 @@
             <div class="card__info" role="button" @click="viewProduct(product.slug)">
               <span class="card__category" v-if="product.price !== 'null' "> Start at ${{product.price}}</span>
               <span class="card__category" v-else> not specified </span>
-              <h5 class="card__title text-white text-capitalize"> {{ product.name }} </h5>
+              <h6 class="card__title text-white font-weight-bold text-capitalize"> {{ product.name }} </h6>
               <!-- <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span> -->
             </div>
           </article>
@@ -94,10 +94,10 @@
         <!-- Trending Professional Services  -->
       <div class="featured--products mb-4 container">
         <div class="mt-4">
-          <h1 class="mb-4"><span style="color: var(--secondary-color)">Top Rated</span> Professional Services</h1>
+          <h4 class="mb-4 font-weight-bold"><span class="font-weight-bold" style="color: var(--secondary-color)">Top Rated</span> Professional Services</h4>
           <div class="">
           <section class="cards content">
-          <article class="card card--1" v-for="product in top_rated_products" :key="product.id">
+          <!-- <article class="card card--1" v-for="product in top_rated_products" :key="product.id">
             <div class="card__img" :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }" role="button" @click="viewProduct(product.slug)"></div>
             <a href="javascript:void(0)" class="card_link" role="button" @click="viewProduct(product.slug)">
               <div class="card__img--hover"  :style="{ 'background-image': `url(${url}/services/photos/${product.app_icon})` }"></div>
@@ -110,7 +110,20 @@
                 <span class="d-block"> <b class="text-white">Rating</b> {{ product.avg_ratings }} <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> 
                 <span class="d-block"> {{ product.delivery_time }} Days <span class="text-white">Delivery</span> </span> </span>
             </div>
-          </article>
+          </article> -->
+          <div class="professional__card" v-for="product in top_rated_products" :key="product.id">
+            <div class="card__top" role="button" @click="viewProduct(product.slug)">
+            <img :src="`${url}/services/photos/${product.app_icon}`" alt="">
+            </div>
+            <div class="d-flex justify-content-between p-2">
+              <h5 class="font-weight-bold text-dark" style="font-size:14px">{{ product.name }}</h5>
+                <h6 class="text-right"> From <span class="text-dark font-weight-bold">${{ product.price }}</span> </h6>
+            </div>
+            <div class="rating--section p-2 d-flex justify-content-between">
+              <span class="" style="font-size:14px"> <b class="text-dark">Rating</b> {{ product.avg_ratings || 0 }} <IconComponent color="#ffb20f" icon="ant-design:star-filled" /> </span> 
+                <span class="" style="font-size:12px"> {{ product.delivery_time }} Day<span v-if="product.delivery_time > 1">s</span> <span class="">Delivery</span> </span> 
+            </div>
+          </div>
         </section>
             </div>
           <router-link to="/categories" class="d-flex align-items-center mt-4 text-dark font-weight-bold" style="gap:20px"> <span>All Services</span>  <span class="material-icons">
