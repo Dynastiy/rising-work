@@ -16,7 +16,7 @@
                 <p> <span v-if="rating.avg_rating !== null ">Rating {{ rating.avg_rating }}</span> {{ rating.total_reviews}}  reviews</p> -->
                 <section>
                     <div class="container body--content">
-                        <div class="d-flex">
+                        <div class="row">
                             <div class="col-lg-8">
                                 <div class="">
                                     <h4 class="font-weight-bold text-capitalize">
@@ -30,9 +30,8 @@
                                     :auto-slide-interval="1500" />
 
                                     <!-- Additional Features  -->
-                                     <section class="container features" style="" >
+                                     <section class=" features" style="" >
                         <div class="mt-4">
-                            <div class="">
                             <div class="mb-4" v-if="product.features.length !== 0 ">
                             <h4 class="m-0 text-dark mb-3">Additional Features</h4>
                             <div class="bg-white shadow-sm p-4">
@@ -51,7 +50,6 @@
                                         <h2 class="col-3">+${{ feature.price }}</h2>
                                     </div> 
                                 </label>
-                            </div>
                             </div>
                         </div>
 
